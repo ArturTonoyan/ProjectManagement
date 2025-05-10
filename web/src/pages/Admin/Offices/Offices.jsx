@@ -13,8 +13,10 @@ import {
 } from "../../../api/apirequests";
 import { useSelector } from "react-redux";
 import { useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 function Offices() {
+  const navigate = useNavigate();
   const user = useSelector((state) => state.user.user.data);
   const [originalData, setOriginalData] = useState([]);
   const [tableData, setTableData] = useState([]);
@@ -144,6 +146,11 @@ function Offices() {
     if (param.key === "delete") {
       funDeleteOffice(param.row.id);
     }
+    if (param.key === "tasks") {
+      const filterObj = [{ key: "office", value: param.row.name }];
+      const filterStr = encodeURIComponent(JSON.stringify(filterObj));
+      navigate(`/admin/equipments?filter=${filterStr}`);
+    }
   };
 
   //! обновление проекта
@@ -189,11 +196,7 @@ function Offices() {
         show={modalShow}
         setShow={setModalShow}
         title={"Добавить проект"}
-        inputs={
-          createOfficeData?.typeOwnership?.[0] === "Арендованный"
-            ? addOfficeData
-            : addOfficeData?.slice(0, 6)
-        }
+        inputs={addOfficeData}
         data={createOfficeData}
         setData={setCreateOfficeData}
         funSave={funCreateOffice}

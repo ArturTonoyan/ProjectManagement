@@ -1,5 +1,6 @@
 import trashICon from "@assets/images/icons/trash.svg";
 import editIcon from "@assets/images/icons/edit.svg";
+import officeIcon from "@assets/images/leftMenu/office.svg";
 
 export const paramMenu = [
   {
@@ -13,14 +14,9 @@ export const paramMenu = [
     key: "delete",
   },
   {
-    name: "Объект",
-    icon: editIcon,
-    key: "object",
-  },
-  {
-    name: "Неполадки",
-    icon: editIcon,
-    key: "problems",
+    name: "Трудозатраы",
+    icon: officeIcon,
+    key: "laborCosts",
   },
 ];
 
@@ -40,11 +36,11 @@ export const addOfficeData = [
     key: "type",
     type: "text",
   },
-  // {
-  //   name: "Этаж",
-  //   key: "floor",
-  //   type: "text",
-  // },
+  {
+    name: "Этаж",
+    key: "floor",
+    type: "text",
+  },
   {
     name: "Проект",
     key: "office",
@@ -91,6 +87,7 @@ export const tableHeader = [
   {
     name: "№",
     key: "number",
+    width: 80,
   },
   {
     name: "Название",
@@ -106,7 +103,7 @@ export const tableHeader = [
   },
   {
     name: "Проект",
-    key: "floor",
+    key: "office",
   },
   {
     name: "Автор",
@@ -132,10 +129,10 @@ export const tableHeader = [
     name: "Готовность",
     key: "state",
   },
-  {
-    name: "Фото",
-    key: "image",
-  },
+  // {
+  //   name: "Фото",
+  //   key: "image",
+  // },
 ];
 
 export const testData = [

@@ -58,10 +58,11 @@ export const tableHeader = [
   {
     name: "№",
     key: "number",
+    width: 80,
   },
   {
     name: "Пользователь",
-    key: "name",
+    key: "user",
     type: "text",
   },
   {
@@ -71,7 +72,7 @@ export const tableHeader = [
   },
   {
     name: "Дата",
-    key: "number",
+    key: "date",
     type: "text",
   },
   {
@@ -81,22 +82,22 @@ export const tableHeader = [
   },
   {
     name: "Задача",
-    key: "office",
+    key: "equipment",
     type: "text",
   },
   {
     name: "Комментарии",
-    key: "office",
+    key: "comments",
     type: "text",
   },
   {
     name: "Затраты",
-    key: "office",
+    key: "costs",
     type: "text",
   },
   {
     name: "Статус",
-    key: "office",
+    key: "status",
     type: "text",
   },
 ];

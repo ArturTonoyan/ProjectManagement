@@ -99,6 +99,7 @@ export const tableHeader = [
   {
     name: "№",
     key: "number",
+    width: 80,
   },
   {
     name: "ФИО",

@@ -26,9 +26,9 @@ export const paramMenu = [
     key: "users",
   },
   {
-    name: "Этажи",
+    name: "Задачи",
     icon: officeIcon,
-    key: "floors",
+    key: "tasks",
   },
   {
     name: "Оборудование",
@@ -112,6 +112,7 @@ export const tableHeader = [
   {
     name: "№",
     key: "number",
+    width: 80,
   },
   {
     name: "Название",

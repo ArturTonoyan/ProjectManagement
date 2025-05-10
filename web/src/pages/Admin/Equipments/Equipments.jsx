@@ -15,8 +15,10 @@ import {
   apiGetUsers,
   apiUpdateEquipment,
 } from "../../../api/apirequests";
+import { useNavigate } from "react-router-dom";
 
 function Equipments() {
+  const navigate = useNavigate();
   const user = useSelector((state) => state.user.user.data);
   const [originalData, setOriginalData] = useState([]);
   const [tableData, setTableData] = useState([]);
@@ -103,7 +105,9 @@ function Equipments() {
     formData.append("inventoryNumber", createData.inventoryNumber);
     formData.append("type", createData.type);
     formData.append("description", createData.description);
-    formData.append("cost", createData.cost);
+    if (createData.cost) {
+      formData.append("cost", createData.cost);
+    }
     formData.append("maxWarranty", createData.maxWarranty);
     formData.append("currentWarranty", createData.currentWarranty);
     formData.append("state", createData.state);
@@ -131,6 +135,11 @@ function Equipments() {
     }
     if (param.key === "delete") {
       funDelete(param.row.id);
+    }
+    if (param.key === "laborCosts") {
+      const filterObj = [{ key: "equipment", value: param.row.name }];
+      const filterStr = encodeURIComponent(JSON.stringify(filterObj));
+      navigate(`/admin/floors?filter=${filterStr}`);
     }
   };
 

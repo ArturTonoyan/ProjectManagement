@@ -2,29 +2,29 @@ import { IsEmail, IsNumber, IsString, Length } from 'class-validator';
 
 export class CreateEquipmentDto {
   @IsString({ message: 'Должно быть строкой' }) //! валидация
-  readonly name: string;
+  readonly name?: string;
   @IsString({ message: 'Должно быть строкой' }) //! валидация
-  readonly inventoryNumber: string;
+  readonly inventoryNumber?: string;
   @IsString({ message: 'Должно быть строкой' }) //! валидация
-  readonly type: string;
+  readonly type?: string;
   @IsString({ message: 'Должно быть строкой' }) //! валидация
-  readonly description: string;
+  readonly description?: string;
   @IsNumber({}, { message: 'Должно быть числом' })
-  readonly cost: number;
+  readonly cost?: number;
   @IsNumber({}, { message: 'Должно быть числом' })
-  readonly maxWarranty: number;
+  readonly maxWarranty?: number;
   @IsNumber({}, { message: 'Должно быть числом' })
-  readonly currentWarranty: number;
+  readonly currentWarranty?: number;
   @IsString({ message: 'Должно быть строкой' })
-  readonly state: string;
+  readonly state?: string;
   @IsString({ message: 'Должно быть строкой' })
-  image: string;
+  image?: string;
   @IsString({ message: 'Должно быть строкой' })
-  userId: string;
+  userId?: string;
   @IsString({ message: 'Должно быть строкой' })
-  floorId: string;
+  floorId?: string;
   @IsString({ message: 'Должно быть строкой' })
-  officeId: string;
+  officeId?: string;
   @IsString({ message: 'Должно быть строкой' })
-  companyId: string;
+  companyId?: string;
 }
