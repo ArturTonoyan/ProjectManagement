@@ -5,16 +5,15 @@ import {
   ForeignKey,
   Table,
   HasMany,
+  BelongsTo,
 } from 'sequelize-typescript';
-import { Company } from 'src/companies/companies.model';
 import { Element } from 'src/elements/elements.model';
 import { Floors } from 'src/floors/floors.model';
-import { Office } from 'src/offices/offices.model';
+import { Project } from 'src/offices/projects.model';
 import { User } from 'src/users/users.model';
 
 interface EquipmentCreationAttrs {
   name: string;
-  companyId: string;
 }
 
 @Table({ tableName: 'equipments' })
@@ -36,13 +35,7 @@ export class Equipment extends Model<Equipment, EquipmentCreationAttrs> {
     type: DataType.STRING,
     allowNull: true,
   })
-  inventoryNumber: string;
-
-  @Column({
-    type: DataType.STRING,
-    allowNull: true,
-  })
-  type: string;
+  status: string;
 
   @Column({
     type: DataType.STRING,
@@ -50,74 +43,38 @@ export class Equipment extends Model<Equipment, EquipmentCreationAttrs> {
   })
   description: string;
 
-  @Column({
-    type: DataType.INTEGER,
-    allowNull: true,
-  })
-  cost: number;
-
-  @Column({
-    type: DataType.INTEGER,
-    allowNull: true,
-  })
-  maxWarranty: number;
-
-  @Column({
-    type: DataType.INTEGER,
-    allowNull: true,
-  })
-  currentWarranty: number;
-
-  @Column({
-    type: DataType.STRING,
-    allowNull: true,
-  })
-  state: string;
-
-  @Column({
-    type: DataType.STRING,
-    allowNull: true,
-  })
-  image: string;
-
   @ForeignKey(() => User)
   @Column({
     type: DataType.UUID,
     allowNull: false,
   })
-  userId: string;
+  authorId: string;
 
-  @ForeignKey(() => Floors)
+  @BelongsTo(() => User)
+  author: User; // 👈 добавлено
+
+  @ForeignKey(() => Project)
   @Column({
     type: DataType.UUID,
     allowNull: false,
   })
-  floorId: string;
+  projectId: string;
 
-  @ForeignKey(() => Office)
+  @BelongsTo(() => Project)
+  project: Project; // 👈 добавлено
+
   @Column({
-    type: DataType.UUID,
-    allowNull: false,
+    type: DataType.INTEGER,
   })
-  officeId: string;
+  maxTimeCost: number;
 
-  @ForeignKey(() => Company)
   @Column({
-    type: DataType.UUID,
-    allowNull: false,
+    type: DataType.INTEGER,
   })
-  companyId: string;
+  currentTimeCost: number;
 
-  @ForeignKey(() => Element)
   @Column({
-    type: DataType.UUID,
-    allowNull: true,
+    type: DataType.INTEGER,
   })
-  elementId: string;
-
-  // @HasMany(() => To)
-  // tos: To[];
-
-  // @HasMany(() => Problem)
-  // problems: Problem[];
+  state: number;
 }

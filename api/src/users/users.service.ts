@@ -37,16 +37,6 @@ export class UsersService {
     return user;
   }
 
-  async getAllByCompany(id: string) {
-    console.log('id', id);
-    //! { include: { all: true } } все поля с которыми связан пользователь подтягиваются в респонс
-    const users = await this.userRepository.findAll({
-      where: { companyId: id },
-      include: { all: true },
-    });
-    return users;
-  }
-
   async getOneUser(id: string) {
     //! { include: { all: true } } все поля с которыми связан пользователь подтягиваются в респонс
     const user = await this.userRepository.findOne({
@@ -127,5 +117,10 @@ export class UsersService {
     }
     await user.save(); // Сохранение обновленного пользователя
     return user;
+  }
+
+  async getAllUsers() {
+    const users = await this.userRepository.findAll({ include: { all: true } });
+    return users;
   }
 }

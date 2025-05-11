@@ -42,31 +42,14 @@ function Registration({ funUpdUser }) {
         <div className={styles.form}>
           {inputs.map((item, index) => (
             <div className={styles.input_box} name={item.key}>
-              {item.key === "role" ? (
-                <div className={styles.role}>
-                  <button
-                    onClick={() => funSetData("role", "ADMIN")}
-                    className={data.role === "ADMIN" ? styles.active : ""}
-                  >
-                    Администратор
-                  </button>
-                  <button
-                    onClick={() => funSetData("role", "USER")}
-                    className={data.role === "USER" ? styles.active : ""}
-                  >
-                    Сотрудник
-                  </button>
-                </div>
-              ) : (
-                <input
-                  key={index}
-                  type={item.type}
-                  placeholder={item.name}
-                  autoComplete="new-password"
-                  value={data[item.key]}
-                  onChange={(e) => funSetData(item.key, e.target.value)}
-                />
-              )}
+              <input
+                key={index}
+                type={item.type}
+                placeholder={item.name}
+                autoComplete="new-password"
+                value={data[item.key]}
+                onChange={(e) => funSetData(item.key, e.target.value)}
+              />
             </div>
           ))}
           <button className={styles.save} onClick={funSave}>

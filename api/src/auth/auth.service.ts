@@ -27,6 +27,7 @@ export class AuthService {
     const user = await this.usersService.createUser({
       ...userDto,
       password: hashPassword,
+      role: 'ADMIN',
     });
     return this.generateToken(user);
   }
@@ -36,9 +37,6 @@ export class AuthService {
       email: user.email,
       id: user.id,
       roles: user.roles,
-      officeId: user.officeId,
-      companyId: user.companyId,
-      floorId: user.floorId,
     };
     return {
       token: this.jwtService.sign(payload),

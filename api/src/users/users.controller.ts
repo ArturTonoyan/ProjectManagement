@@ -37,13 +37,6 @@ export class UsersController {
     return this.usersService.createUserAdmin(userDto);
   }
 
-  @Roles('ADMIN') //! ограничение по ролям
-  @Get('/all/:id')
-  @UseGuards(RolesGuard)
-  getAllByCompanyId(@Param('id') id: string) {
-    return this.usersService.getAllByCompany(id);
-  }
-
   @Get('me')
   @UseGuards(JwtAuthGuard)
   async getOne(@Req() request: any) {
@@ -80,5 +73,10 @@ export class UsersController {
   @Put(':id')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.updateUserId(id, updateUserDto);
+  }
+
+  @Get()
+  getAll() {
+    return this.usersService.getAllUsers();
   }
 }

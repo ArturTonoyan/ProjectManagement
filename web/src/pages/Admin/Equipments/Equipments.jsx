@@ -27,21 +27,7 @@ function Equipments() {
 
   const [modalEditShow, setModalEditShow] = useState(false);
   const [modalEditData, setModalEditData] = useState({});
-  const [createData, setCreateData] = useState({
-    name: "",
-    inventoryNumber: "",
-    type: "",
-    description: "",
-    cost: "",
-    maxWarranty: "",
-    currentWarranty: "",
-    state: "",
-    image: "",
-    userId: "",
-    floorId: "",
-    officeId: "",
-    companyId: "",
-  });
+  const [createData, setCreateData] = useState({});
 
   //! поиск по всем полям
   useEffect(() => {
@@ -58,40 +44,34 @@ function Equipments() {
   }, [shearchParam, originalData]);
 
   const { data: equipments, refetch: refetchEquipments } = useQuery({
-    queryKey: ["equipments/all/id", user?.companyId],
-    queryFn: () => apiGetEquipments(user?.companyId),
+    queryKey: ["equipments/all"],
+    queryFn: () => apiGetEquipments(),
     staleTime: Infinity, //! не обновлять
-    enabled: !!user?.companyId,
   });
 
-  const { data: offices, refetch: refetchOffices } = useQuery({
-    queryKey: ["offices/all/id", user?.companyId],
-    queryFn: () => apiGetOffices(user?.companyId),
+  const { data: projects, refetch: refetchprojects } = useQuery({
+    queryKey: ["projects/all"],
+    queryFn: () => apiGetOffices(),
     staleTime: Infinity, //! не обновлять
-    enabled: !!user?.companyId,
-  });
-
-  const { data: floors, refetch: refetchFloors } = useQuery({
-    queryKey: ["offices", user?.companyId],
-    queryFn: () => apiGetFloors(user?.companyId),
-    staleTime: Infinity, //! не обновлять
-    enabled: !!user?.companyId,
   });
 
   const { data: users, refetch: refetchUsers } = useQuery({
     queryKey: ["users/all", user?.companyId],
     queryFn: () => apiGetUsers(user?.companyId),
     staleTime: Infinity, //! не обновлять
-    enabled: !!user?.companyId,
   });
 
   useEffect(() => {
     if (equipments?.data) {
       const qdat = equipments?.data.map((item) => ({
         ...item,
-        office: offices?.data?.find((el) => el.id === item.officeId)?.name,
-        floor: floors?.data?.find((el) => el.id === item.floorId)?.name,
-        user: users?.data?.find((el) => el.id === item.userId)?.name,
+        project: item?.project?.name,
+        author:
+          item?.author?.name +
+          " " +
+          item?.author?.surname +
+          " " +
+          item?.author?.patronymic,
       }));
       setTableData(qdat);
       setOriginalData(qdat);
@@ -100,23 +80,7 @@ function Equipments() {
 
   //! функция создания
   const funCreate = () => {
-    const formData = new FormData();
-    formData.append("name", createData.name);
-    formData.append("inventoryNumber", createData.inventoryNumber);
-    formData.append("type", createData.type);
-    formData.append("description", createData.description);
-    if (createData.cost) {
-      formData.append("cost", createData.cost);
-    }
-    formData.append("maxWarranty", createData.maxWarranty);
-    formData.append("currentWarranty", createData.currentWarranty);
-    formData.append("state", createData.state);
-    formData.append("image", createData.image);
-    formData.append("userId", user?.id);
-    formData.append("floorId", createData.floorId);
-    formData.append("officeId", createData.officeId);
-    formData.append("companyId", user?.companyId);
-    apiCreateEquipment(formData).then((res) => {
+    apiCreateEquipment({ ...createData, authorId: user.id }).then((res) => {
       console.log("res", res);
       if (res.status === 201) {
         setModalShow(false);
@@ -174,20 +138,10 @@ function Equipments() {
         setData={setCreateData}
         funSave={funCreate}
         lists={{
-          office: {
-            data: offices?.data,
-            key: "officeId",
-            value: ["name", "address"],
-          },
-          floor: {
-            data: floors?.data,
-            key: "floorId",
-            value: ["name", "address"],
-          },
-          user: {
-            data: users?.data,
-            key: "userId",
-            value: ["name", "surname", "patronymic", "email"],
+          projects: {
+            data: projects?.data,
+            key: "projectId",
+            value: ["name"],
           },
         }}
       />

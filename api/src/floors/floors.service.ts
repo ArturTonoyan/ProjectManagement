@@ -6,7 +6,7 @@ import { User } from 'src/users/users.model';
 import { Floors } from './floors.model';
 import { CreateFloorsDto } from './dto/create-floors-dto';
 import { UpdateFloorsDto } from './dto/update-floors-dto';
-import { Office } from 'src/offices/offices.model';
+import { Project } from 'src/offices/projects.model';
 
 @Injectable()
 export class FloorsService {
@@ -18,11 +18,10 @@ export class FloorsService {
   async create(dto: CreateFloorsDto) {
     console.log('dto', dto);
     try {
-      const myOffice = await Office.findByPk(dto.officeId);
-      if (!myOffice) {
+      const myProject = await Project.findByPk(dto.projectId);
+      if (!myProject) {
         throw new Error('Офис не найден');
       }
-      dto.companyId = myOffice.companyId;
       return await this.floorsRepository.create(dto);
     } catch (error) {
       console.error('Ошибка при создании этажа:', error);
@@ -38,22 +37,6 @@ export class FloorsService {
       return floor;
     } catch (error) {
       console.error('Ошибка при получении этажа:', error);
-      throw new InternalServerErrorException(error.message);
-    }
-  }
-
-  async getAllByCompanyId(id: string) {
-    try {
-      const floors = await this.floorsRepository.findAll({
-        where: { companyId: id },
-        include: { all: true },
-      });
-      if (!floors) {
-        throw new Error('Этажи не найдены');
-      }
-      return floors;
-    } catch (error) {
-      console.error('Ошибка при получении этажей:', error);
       throw new InternalServerErrorException(error.message);
     }
   }

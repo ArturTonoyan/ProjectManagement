@@ -9,40 +9,17 @@ import { CreateEquipmentDto } from './dto/create-equipment-dto';
 export class EquipmentsService {
   constructor(
     @InjectModel(Equipment) private equipmentRepository: typeof Equipment,
-    private rolesService: RolesService,
-    private fileService: FilesService,
   ) {}
 
-  async create(dto: CreateEquipmentDto, image: Express.Multer.File) {
-    if (image) {
-      const fileName = await this.fileService.createFile(image); // Сохранение файла и получение имени
-      dto.image = fileName; // Обновление DTO с именем файла
-    }
+  async create(dto: CreateEquipmentDto) {
     const equipment = await this.equipmentRepository.create(dto);
     return equipment;
   }
 
-  async getAllByCompany(id: string) {
-    console.log('id', id);
-    const equipment = await this.equipmentRepository.findAll({
-      where: { companyId: id },
-      include: { all: true },
-    });
-    return equipment;
-  }
-
-  async update(
-    id: string,
-    dto: CreateEquipmentDto,
-    image: Express.Multer.File,
-  ) {
+  async update(id: string, dto: CreateEquipmentDto) {
     const equipment = await Equipment.findByPk(id);
     if (!equipment) {
-      throw new Error('Оборудование не найдено');
-    }
-    if (image) {
-      const fileName = await this.fileService.createFile(image);
-      dto.image = fileName;
+      throw new Error('Задача не найдена');
     }
     Object.assign(equipment, dto);
     await equipment.save();
@@ -52,9 +29,16 @@ export class EquipmentsService {
   async delete(id: string) {
     const equipment = await Equipment.findByPk(id);
     if (!equipment) {
-      throw new Error('Оборудование не найдено');
+      throw new Error('Задача не найдена');
     }
     await equipment.destroy();
     return equipment;
+  }
+
+  async getAll() {
+    const equipments = await this.equipmentRepository.findAll({
+      include: { all: true },
+    });
+    return equipments;
   }
 }

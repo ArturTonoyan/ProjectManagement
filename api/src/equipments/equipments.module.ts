@@ -8,22 +8,14 @@ import { Equipment } from './equipments.model';
 import { RolesModule } from 'src/roles/roles.module';
 import { AuthModule } from 'src/auth/auth.module';
 import { FilesModule } from 'src/files/files.module';
-import { Company } from 'src/companies/companies.model';
-import { Office } from 'src/offices/offices.model';
 import { Element } from 'src/elements/elements.model';
+import { Project } from 'src/offices/projects.model';
 
 @Module({
   providers: [EquipmentsService],
   controllers: [EquipmentsController],
   imports: [
-    SequelizeModule.forFeature([
-      Floors,
-      User,
-      Equipment,
-      Company,
-      Office,
-      Element,
-    ]),
+    SequelizeModule.forFeature([Floors, User, Equipment, Project, Element]),
     RolesModule,
     forwardRef(() => AuthModule),
     FilesModule,

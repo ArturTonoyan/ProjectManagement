@@ -6,14 +6,8 @@ import {
   Param,
   Post,
   Put,
-  Req,
-  UploadedFile,
-  UseGuards,
-  UseInterceptors,
 } from '@nestjs/common';
 import { Roles } from 'src/auth/roles-auth-decorator';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { FileInterceptor } from '@nestjs/platform-express';
 import { FloorsService } from './floors.service';
 import { CreateFloorsDto } from './dto/create-floors-dto';
 import { UpdateFloorsDto } from './dto/update-floors-dto';
@@ -31,11 +25,6 @@ export class FloorsController {
   @Get(':id')
   getOne(@Param('id') id: string) {
     return this.floorsService.getOne(id);
-  }
-
-  @Get('all/:id')
-  getAll(@Param('id') id: string) {
-    return this.floorsService.getAllByCompanyId(id);
   }
 
   @Roles('ADMIN')

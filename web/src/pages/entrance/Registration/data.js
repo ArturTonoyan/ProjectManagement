@@ -19,11 +19,7 @@ export const inputs = [
     name: "Email",
     key: "email",
   },
-  {
-    type: "text",
-    name: "Роль",
-    key: "role",
-  },
+
   {
     type: "password",
     name: "Пароль",

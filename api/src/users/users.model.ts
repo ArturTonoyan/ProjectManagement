@@ -8,10 +8,10 @@ import {
   ForeignKey,
   HasOne,
 } from 'sequelize-typescript';
-import { Company } from 'src/companies/companies.model';
 import { Equipment } from 'src/equipments/equipments.model';
 import { Floors } from 'src/floors/floors.model';
-import { Office } from 'src/offices/offices.model';
+import { ProjectsUsers } from 'src/offices/projects-users.model';
+import { Project } from 'src/offices/projects.model';
 import { Role } from 'src/roles/roles.model';
 import { UserRoles } from 'src/roles/user-roles.model';
 
@@ -76,30 +76,9 @@ export class User extends Model<User, UserCreationAttrs> {
   @BelongsToMany(() => Role, () => UserRoles)
   roles: Role[];
 
-  @ForeignKey(() => Company)
-  @Column({
-    type: DataType.UUID,
-    allowNull: true,
-  })
-  companyId: string;
-
-  @ForeignKey(() => Office)
-  @Column({
-    type: DataType.UUID,
-    allowNull: true,
-  })
-  officeId: string;
-
-  @ForeignKey(() => Floors)
-  @Column({
-    type: DataType.UUID,
-    allowNull: true,
-  })
-  floorId: string;
+  @BelongsToMany(() => Project, () => ProjectsUsers)
+  projects: Project[];
 
   @HasMany(() => Equipment)
   eqipments: Equipment[];
-
-  @HasOne(() => Office)
-  office: Office;
 }

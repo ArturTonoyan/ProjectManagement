@@ -9,17 +9,16 @@ import { UserRoles } from './roles/user-roles.model';
 import { AuthModule } from './auth/auth.module';
 import { FilesModule } from './files/files.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
-import { CompaniesModule } from './companies/companies.module';
 import * as path from 'path';
-import { Company } from './companies/companies.model';
-import { OfficesModule } from './offices/offices.module';
-import { Office } from './offices/offices.model';
 import { FloorsModule } from './floors/floors.module';
 import { Floors } from './floors/floors.model';
 import { EquipmentsModule } from './equipments/equipments.module';
 import { Equipment } from './equipments/equipments.model';
 import { ElementsModule } from './elements/elements.module';
 import { Element } from './elements/elements.model';
+import { Project } from './offices/projects.model';
+import { ProjectsModule } from './offices/projects.module';
+import { ProjectsUsers } from './offices/projects-users.model';
 
 @Module({
   controllers: [],
@@ -43,11 +42,11 @@ import { Element } from './elements/elements.model';
         User,
         Role,
         UserRoles,
-        Company,
-        Office,
+        Project,
         Floors,
         Equipment,
         Element,
+        ProjectsUsers,
       ],
       autoLoadModels: true,
     }),
@@ -55,8 +54,7 @@ import { Element } from './elements/elements.model';
     RolesModule,
     AuthModule,
     FilesModule,
-    CompaniesModule,
-    OfficesModule,
+    ProjectsModule,
     FloorsModule,
     EquipmentsModule,
     ElementsModule,

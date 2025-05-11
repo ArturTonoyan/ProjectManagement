@@ -3,7 +3,6 @@ import {
   Column,
   DataType,
   Table,
-  BelongsToMany,
   ForeignKey,
 } from 'sequelize-typescript';
 import { User } from 'src/users/users.model';

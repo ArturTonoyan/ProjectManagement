@@ -8,7 +8,7 @@ export class CreateFloorsDto {
   readonly number: number;
 
   @IsString({ message: 'Должно быть строкой' }) //! валидация
-  officeId: string;
+  projectId: string;
 
   @IsString({ message: 'Должно быть строкой' }) //! валидация
   companyId: string;

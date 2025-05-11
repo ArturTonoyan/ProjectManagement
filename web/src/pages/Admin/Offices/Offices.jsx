@@ -25,12 +25,7 @@ function Offices() {
   const [modalEditShow, setModalEditShow] = useState(false);
   const [modalEditData, setModalEditData] = useState({});
   const [modalEditInputData, setModalEditInputData] = useState({});
-  const [createOfficeData, setCreateOfficeData] = useState({
-    name: "",
-    address: "",
-    phone: "",
-    email: "",
-  });
+  const [createOfficeData, setCreateOfficeData] = useState({});
 
   const {
     status,
@@ -38,17 +33,15 @@ function Offices() {
     error,
     refetch,
   } = useQuery({
-    queryKey: ["offices/all/id", user?.companyId],
-    queryFn: () => apiGetOffices(user?.companyId),
+    queryKey: ["projects/all"],
+    queryFn: () => apiGetOffices(),
     staleTime: Infinity, //! не обновлять
-    enabled: !!user?.companyId,
   });
 
   const { data: users } = useQuery({
-    queryKey: ["users/all/id", user?.companyId],
-    queryFn: () => apiGetUsers(user?.companyId),
+    queryKey: ["users"],
+    queryFn: () => apiGetUsers(),
     staleTime: Infinity, //! не обновлять
-    enabled: !!user?.companyId,
   });
 
   const funGetUserFio = (user) => {
@@ -107,16 +100,11 @@ function Offices() {
         formData.append(key, value);
       }
     });
-    apiCreateOffice(formData, user?.companyId).then((res) => {
+    apiCreateOffice(formData).then((res) => {
       console.log("res", res);
       if (res.status === 201) {
         setModalShow(false);
-        setCreateOfficeData({
-          name: "",
-          address: "",
-          phone: "",
-          email: "",
-        });
+        setCreateOfficeData({});
         refetch();
       }
     });
@@ -155,24 +143,8 @@ function Offices() {
 
   //! обновление проекта
   const funUpdateOffice = () => {
-    const formData = new FormData();
-    let fields = {
-      ...modalEditInputData,
-    };
-    if (modalEditInputData.cost) {
-      fields.cost = Number(modalEditInputData.cost);
-    }
-    if (modalEditInputData.area) {
-      fields.area = Number(modalEditInputData.area);
-    }
-
-    Object.entries(fields).forEach(([key, value]) => {
-      if (value !== undefined && value !== null) {
-        formData.append(key, value);
-      }
-    });
-
-    apiUpdateOffice(formData, modalEditData.id).then((res) => {
+    console.log("modalEditInputData", modalEditInputData);
+    apiUpdateOffice(modalEditInputData, modalEditData.id).then((res) => {
       if (res.status === 200) {
         setModalEditShow(false);
         refetch();
@@ -224,11 +196,7 @@ function Offices() {
         show={modalEditShow}
         setShow={setModalEditShow}
         title={"Редактировать данные проекта"}
-        inputs={
-          modalEditData?.typeOwnership?.[0] === "Арендованный"
-            ? addOfficeData
-            : addOfficeData?.slice(0, 6)
-        }
+        inputs={addOfficeData}
         data={modalEditData}
         setData={setModalEditData}
         funSave={funUpdateOffice}

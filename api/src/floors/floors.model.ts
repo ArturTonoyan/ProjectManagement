@@ -1,15 +1,6 @@
-import {
-  Model,
-  Column,
-  DataType,
-  Table,
-  ForeignKey,
-  HasMany,
-} from 'sequelize-typescript';
-import { Company } from 'src/companies/companies.model';
+import { Model, Column, DataType, Table, HasMany } from 'sequelize-typescript';
 import { Element } from 'src/elements/elements.model';
 import { Equipment } from 'src/equipments/equipments.model';
-import { Office } from 'src/offices/offices.model';
 import { User } from 'src/users/users.model';
 
 interface FloorsCreationAttrs {
@@ -37,24 +28,6 @@ export class Floors extends Model<Floors, FloorsCreationAttrs> {
     allowNull: false,
   })
   number: number;
-
-  @ForeignKey(() => Office)
-  @Column({
-    type: DataType.UUID,
-  })
-  officeId: string;
-
-  @ForeignKey(() => Company)
-  @Column({
-    type: DataType.UUID,
-  })
-  companyId: string;
-
-  @HasMany(() => User)
-  users: User[];
-
-  @HasMany(() => Equipment)
-  eqipments: Equipment[];
 
   @HasMany(() => Element)
   elements: Element[];

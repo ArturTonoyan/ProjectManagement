@@ -27,28 +27,13 @@ export const addOfficeData = [
     type: "text",
   },
   {
-    name: "Индификатор",
-    key: "inventoryNumber",
-    type: "text",
-  },
-  {
     name: "Статус",
-    key: "type",
-    type: "text",
-  },
-  {
-    name: "Этаж",
-    key: "floor",
+    key: "status",
     type: "text",
   },
   {
     name: "Проект",
-    key: "office",
-    type: "text",
-  },
-  {
-    name: "Автор",
-    key: "user",
+    key: "projects",
     type: "text",
   },
   {
@@ -56,30 +41,15 @@ export const addOfficeData = [
     key: "description",
     type: "text",
   },
-  // {
-  //   name: "Стоимость",
-  //   key: "cost",
-  //   type: "text",
-  // },
   {
-    name: "Максимальные затраты",
-    key: "maxWarranty",
-    type: "text",
-  },
-  {
-    name: "Текущая затраты",
-    key: "currentWarranty",
+    name: "Оценка временных затрат",
+    key: "maxTimeCost",
     type: "text",
   },
   {
     name: "Готовность",
     key: "state",
-    type: "text",
-  },
-  {
-    name: "Фото",
-    key: "image",
-    type: "text",
+    type: "number",
   },
 ];
 
@@ -94,85 +64,31 @@ export const tableHeader = [
     key: "name",
   },
   {
-    name: "Индификатор",
-    key: "inventoryNumber",
-  },
-  {
     name: "Статус",
-    key: "type",
+    key: "status",
   },
   {
     name: "Проект",
-    key: "office",
+    key: "project",
   },
   {
     name: "Автор",
-    key: "user",
+    key: "author",
   },
   {
     name: "Описание",
     key: "description",
   },
-  // {
-  //   name: "Стоимость",
-  //   key: "cost",
-  // },
   {
-    name: "Максимальные затраты",
-    key: "maxWarranty",
+    name: "Оценка временных затрат",
+    key: "maxTimeCost",
   },
   {
     name: "Текущие затраты",
-    key: "currentWarranty",
+    key: "currentTimeCost",
   },
   {
     name: "Готовность",
     key: "state",
-  },
-  // {
-  //   name: "Фото",
-  //   key: "image",
-  // },
-];
-
-export const testData = [
-  {
-    number: "1",
-    name: "Название",
-    inventoryNumber: "Инвентарный номер",
-    type: "Тип",
-    floor: "Этаж",
-    employee: "Сотрудник",
-    description: "Описание",
-    cost: "Стоимость",
-    maxWarranty: "Максимальная наработка",
-    currentWarranty: "Текущая наработка",
-    state: "Состояние",
-  },
-  {
-    number: "2",
-    name: "Название",
-    inventoryNumber: "Инвентарный номер",
-    type: "Тип",
-    floor: "Этаж",
-    employee: "Сотрудник",
-    description: "Описание",
-    cost: "Стоимость",
-    maxWarranty: "Максимальная наработка",
-    currentWarranty: "Текущая наработка",
-    state: "Состояние",
-  },
-  {
-    number: "3",
-    name: "Название",
-    inventoryNumber: "Инвентарный номер",
-    type: "Тип",
-    floor: "Этаж",
-    employee: "Сотрудник",
-    description: "Описание",
-    cost: "Стоимость",
-    maxWarranty: "Максимальная наработка",
-    currentWarranty: "Текущая наработка",
-    state: "Состояние",
   },
 ];

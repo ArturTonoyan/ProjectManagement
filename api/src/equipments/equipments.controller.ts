@@ -6,46 +6,28 @@ import {
   Param,
   Post,
   Put,
-  Req,
-  UploadedFile,
-  UseInterceptors,
 } from '@nestjs/common';
 import { EquipmentsService } from './equipments.service';
 import { CreateEquipmentDto } from './dto/create-equipment-dto';
-import { Roles } from 'src/auth/roles-auth-decorator';
-import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('equipments')
 export class EquipmentsController {
   constructor(private equipmentsService: EquipmentsService) {}
-
-  @Roles('ADMIN')
   @Post()
-  @UseInterceptors(FileInterceptor('image'))
-  create(
-    @Body() dto: CreateEquipmentDto,
-    @UploadedFile() image: Express.Multer.File,
-  ) {
-    return this.equipmentsService.create(dto, image);
+  create(@Body() dto: CreateEquipmentDto) {
+    return this.equipmentsService.create(dto);
   }
 
-  @Roles('ADMIN') //! ограничение по ролям
-  @Get('/all/:id')
-  getAllByCompanyId(@Param('id') id: string) {
-    return this.equipmentsService.getAllByCompany(id);
+  @Get()
+  getAll() {
+    return this.equipmentsService.getAll();
   }
 
   @Put(':id')
-  @UseInterceptors(FileInterceptor('image')) // Используем FileInterceptor для обработки файла
-  async update(
-    @Param('id') id: string,
-    @Body() dto: CreateEquipmentDto,
-    @UploadedFile() image: Express.Multer.File, // Получаем файл изображения
-  ) {
-    return this.equipmentsService.update(id, dto, image); // Обновление пользователя
+  async update(@Param('id') id: string, @Body() dto: CreateEquipmentDto) {
+    return this.equipmentsService.update(id, dto); // Обновление пользователя
   }
 
-  @Roles('ADMIN')
   @Delete(':id')
   delete(@Param('id') id: string) {
     return this.equipmentsService.delete(id);

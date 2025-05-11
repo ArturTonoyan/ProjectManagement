@@ -45,7 +45,7 @@ export const addOfficeData = [
   },
   {
     name: "Описание",
-    key: "address",
+    key: "description",
     type: "text",
   },
   // {
@@ -120,7 +120,7 @@ export const tableHeader = [
   },
   {
     name: "Описание",
-    key: "address",
+    key: "description",
   },
   // {
   //   name: "Телефон",

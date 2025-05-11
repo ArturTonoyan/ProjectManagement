@@ -8,10 +8,9 @@ import { UserRoles } from 'src/roles/user-roles.model';
 import { RolesModule } from 'src/roles/roles.module';
 import { AuthModule } from 'src/auth/auth.module';
 import { FilesModule } from 'src/files/files.module';
-import { Company } from 'src/companies/companies.model';
-import { Office } from 'src/offices/offices.model';
 import { Equipment } from 'src/equipments/equipments.model';
 import { Floors } from 'src/floors/floors.model';
+import { Project } from 'src/offices/projects.model';
 
 @Module({
   controllers: [UsersController],
@@ -21,8 +20,7 @@ import { Floors } from 'src/floors/floors.model';
       User,
       Role,
       UserRoles,
-      Company,
-      Office,
+      Project,
       Equipment,
       Floors,
     ]),
