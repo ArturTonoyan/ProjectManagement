@@ -40,17 +40,9 @@ function Users() {
     }
   }, [shearchParam, originalData]);
   const { data: users, refetch: refetchUsers } = useQuery({
-    queryKey: ["users/all", user?.companyId],
-    queryFn: () => apiGetUsers(user?.companyId),
+    queryKey: ["users"],
+    queryFn: () => apiGetUsers(),
     staleTime: Infinity, //! не обновлять
-    enabled: !!user?.companyId,
-  });
-
-  const { data: offices, refetch: refetchOffices } = useQuery({
-    queryKey: ["offices/all/id", user?.companyId],
-    queryFn: () => apiGetOffices(user?.companyId),
-    staleTime: Infinity, //! не обновлять
-    enabled: !!user?.companyId,
   });
 
   const { data: roles, refetch: refetchRoles } = useQuery({
@@ -65,7 +57,6 @@ function Users() {
         ...item,
         fio: `${item.surname} ${item.name} ${item.patronymic}`,
         role: item.roles?.map((role) => role.description).join(", "),
-        office: item?.office?.name,
       }));
       setTableData(qdata);
       setOriginalData(qdata);
@@ -136,11 +127,6 @@ function Users() {
             key: "roleId",
             obj: { key: "role", value: "value" },
             value: ["description"],
-          },
-          office: {
-            data: offices?.data,
-            key: "officeId",
-            value: ["name"],
           },
         }}
       />

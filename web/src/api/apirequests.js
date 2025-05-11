@@ -60,6 +60,12 @@ export const apiUpdateUser = async (data, id) => {
   return await apiRequest("put", `/users/${id}`, data);
 };
 
+export const apiUpdateUserAvatar = async (id, data) => {
+  return await apiRequest("post", `/users/${id}/avatar`, data, {
+    "Content-Type": "multipart/form-data",
+  });
+};
+
 //! получение всех ролей
 export const apiGetRoles = async () => {
   return await apiRequest("get", "/roles");
@@ -112,48 +118,46 @@ export const apiDeleteOffice = async (officeId) => {
 
 //! создание этажа
 export const apiCreateFloor = async (data) => {
-  return await apiRequest("post", `/floors`, data);
+  return await apiRequest("post", `/laborcosts`, data);
 };
 
 //! получение всех этажей
-export const apiGetFloors = async (companyId) => {
-  return await apiRequest("get", `/floors/all/${companyId}`);
+export const apiGetFloors = async () => {
+  return await apiRequest("get", `/laborcosts`);
 };
 //! обновление данных этажа
 export const apiUpdateFloor = async (data, id) => {
-  return await apiRequest("put", `/floors/${id}`, data);
+  return await apiRequest("put", `/laborcosts/${id}`, data);
 };
 
 //! удаление этажа
 export const apiDeleteFloor = async (id) => {
-  return await apiRequest("delete", `/floors/${id}`);
+  return await apiRequest("delete", `/laborcosts/${id}`);
 };
 
 //! получение всех пользователей
-export const apiGetUsers = async (companyId) => {
+export const apiGetUsers = async () => {
   return await apiRequest("get", `/users`);
 };
 
-//! получение всех оборудований
-export const apiGetEquipments = async () => {
-  return await apiRequest("get", `/equipments`);
+//! получение всех задач
+export const apiGetTasks = async () => {
+  return await apiRequest("get", `/tasks`);
 };
 
 //! создание оборудования
-export const apiCreateEquipment = async (data) => {
-  return await apiRequest("post", `/equipments`, data);
+export const apiCreateTask = async (data) => {
+  return await apiRequest("post", `/tasks`, data);
 };
 
 //! обновление данных оборудования
-export const apiUpdateEquipment = async (data, id) => {
-  return await apiRequest("put", `/equipments/${id}`, data, {
-    "Content-Type": "multipart/form-data",
-  });
+export const apiUpdateTask = async (data, id) => {
+  return await apiRequest("put", `/tasks/${id}`, data);
 };
 
 //! удаление оборудования
-export const apiDeleteEquipment = async (id) => {
-  return await apiRequest("delete", `/equipments/${id}`);
+export const apiDeleteTask = async (id) => {
+  return await apiRequest("delete", `/tasks/${id}`);
 };
 
 //! добавить обьект карты
@@ -169,8 +173,8 @@ export const apiEddElements = async (data) => {
 };
 
 //! получение всех обьектов карты
-export const apiGetElements = async (floorId) => {
-  return await apiRequest("get", `/elements/all/${floorId}`);
+export const apiGetElements = async (laborcostId) => {
+  return await apiRequest("get", `/elements/all/${laborcostId}`);
 };
 
 //! удаление объкта

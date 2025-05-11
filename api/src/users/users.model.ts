@@ -5,11 +5,9 @@ import {
   Table,
   BelongsToMany,
   HasMany,
-  ForeignKey,
-  HasOne,
 } from 'sequelize-typescript';
-import { Equipment } from 'src/equipments/equipments.model';
-import { Floors } from 'src/floors/floors.model';
+import { Task } from 'src/equipments/tasks.model';
+import { Laborcosts } from 'src/floors/laborcosts.model';
 import { ProjectsUsers } from 'src/offices/projects-users.model';
 import { Project } from 'src/offices/projects.model';
 import { Role } from 'src/roles/roles.model';
@@ -79,6 +77,9 @@ export class User extends Model<User, UserCreationAttrs> {
   @BelongsToMany(() => Project, () => ProjectsUsers)
   projects: Project[];
 
-  @HasMany(() => Equipment)
-  eqipments: Equipment[];
+  @HasMany(() => Task)
+  tasks: Task[];
+
+  @HasMany(() => Laborcosts)
+  laborcosts: Laborcosts[];
 }

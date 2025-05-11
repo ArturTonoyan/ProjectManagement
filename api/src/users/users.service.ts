@@ -123,4 +123,21 @@ export class UsersService {
     const users = await this.userRepository.findAll({ include: { all: true } });
     return users;
   }
+
+  async updateUserAvatar(id: string, image: Express.Multer.File) {
+    const user = await User.findByPk(id);
+    if (!user) {
+      throw new Error('Пользователь не найден');
+    }
+    if (!image) {
+      throw new Error('Файл изображения не предоставлен');
+    }
+    const fileName = await this.fileService.createFile(image);
+    user.image = fileName;
+    await user.save();
+    return {
+      message: 'Аватар обновлён',
+      image: fileName,
+    };
+  }
 }

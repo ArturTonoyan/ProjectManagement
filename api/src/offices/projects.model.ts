@@ -7,7 +7,7 @@ import {
   HasMany,
   BelongsToMany,
 } from 'sequelize-typescript';
-import { Equipment } from 'src/equipments/equipments.model';
+import { Task } from 'src/equipments/tasks.model';
 import { User } from 'src/users/users.model';
 import { ProjectsUsers } from './projects-users.model';
 
@@ -56,6 +56,6 @@ export class Project extends Model<Project, ProjectCreationAttrs> {
   @BelongsToMany(() => User, () => ProjectsUsers)
   users: User[];
 
-  @HasMany(() => Equipment)
-  eqipments: Equipment[];
+  @HasMany(() => Task)
+  eqipments: Task[];
 }

@@ -21,19 +21,9 @@ export const paramMenu = [
     key: "delete",
   },
   {
-    name: "Сотрудники",
-    icon: userIcon,
-    key: "users",
-  },
-  {
     name: "Задачи",
     icon: officeIcon,
     key: "tasks",
-  },
-  {
-    name: "Оборудование",
-    icon: deviceIcon,
-    key: "devices",
   },
 ];
 
@@ -43,43 +33,13 @@ export const addOfficeData = [
     key: "name",
     type: "text",
   },
-  {
-    name: "Описание",
-    key: "description",
-    type: "text",
-  },
-  // {
-  //   name: "Телефон",
-  //   key: "phone",
-  //   type: "text",
-  //   placeholder: "+7 (___) ___-__-__",
-  // },
-  // {
-  //   name: "Почта",
-  //   key: "email",
-  //   type: "email",
-  // },
+
   {
     name: "Руководитель",
     key: "director",
     type: "text",
   },
-  // {
-  //   name: "Тип собственности",
-  //   key: "typeOwnership",
-  //   type: "text",
-  // },
-  // {
-  //   name: "Арендодатель",
-  //   key: "renter",
-  //   type: "text",
-  // },
-  // {
-  //   name: "Договор",
-  //   key: "contract",
-  //   type: "file",
-  //   accept: "application/pdf",
-  // },
+
   {
     name: "Дата начала прректа",
     key: "dateStart",
@@ -90,22 +50,11 @@ export const addOfficeData = [
     key: "dateEnd",
     type: "date",
   },
-  // {
-  //   name: "Стоимость аренды в месяц",
-  //   key: "cost",
-  //   type: "number",
-  // },
-  // {
-  //   name: "Контакт арендодателя",
-  //   key: "renterContact",
-  //   type: "text",
-  //   placeholder: "+7 (___) ___-__-__",
-  // },
-  // {
-  //   name: "Площадь кв. м.",
-  //   key: "area",
-  //   type: "number",
-  // },
+  {
+    name: "Описание",
+    key: "description",
+    type: "descr",
+  },
 ];
 
 export const tableHeader = [

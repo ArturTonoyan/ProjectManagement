@@ -7,17 +7,16 @@ import Table from "../../../modules/Table/Table";
 import { useSelector } from "react-redux";
 import { useQuery } from "@tanstack/react-query";
 import {
-  apiCreateEquipment,
-  apiDeleteEquipment,
-  apiGetEquipments,
-  apiGetFloors,
+  apiCreateTask,
+  apiDeleteTask,
+  apiGetTasks,
   apiGetOffices,
   apiGetUsers,
-  apiUpdateEquipment,
+  apiUpdateTask,
 } from "../../../api/apirequests";
 import { useNavigate } from "react-router-dom";
 
-function Equipments() {
+function Tasks() {
   const navigate = useNavigate();
   const user = useSelector((state) => state.user.user.data);
   const [originalData, setOriginalData] = useState([]);
@@ -43,9 +42,9 @@ function Equipments() {
     }
   }, [shearchParam, originalData]);
 
-  const { data: equipments, refetch: refetchEquipments } = useQuery({
-    queryKey: ["equipments/all"],
-    queryFn: () => apiGetEquipments(),
+  const { data: equipments, refetch: refetchTasks } = useQuery({
+    queryKey: ["tasks/all"],
+    queryFn: () => apiGetTasks(),
     staleTime: Infinity, //! не обновлять
   });
 
@@ -80,19 +79,18 @@ function Equipments() {
 
   //! функция создания
   const funCreate = () => {
-    apiCreateEquipment({ ...createData, authorId: user.id }).then((res) => {
+    apiCreateTask({ ...createData, authorId: user.id }).then((res) => {
       console.log("res", res);
       if (res.status === 201) {
         setModalShow(false);
         setCreateData({});
-        refetchEquipments();
+        refetchTasks();
       }
     });
   };
 
   //! при клике в контекстном меню
   const funParamClick = (param) => {
-    console.log("param", param);
     if (param.key === "edit") {
       setModalEditShow(true);
       setModalEditData(param.row);
@@ -103,31 +101,32 @@ function Equipments() {
     if (param.key === "laborCosts") {
       const filterObj = [{ key: "equipment", value: param.row.name }];
       const filterStr = encodeURIComponent(JSON.stringify(filterObj));
-      navigate(`/admin/floors?filter=${filterStr}`);
+      navigate(`/floors?filter=${filterStr}`);
     }
   };
 
   //! обновление задачи
   const funUpdate = () => {
-    apiUpdateEquipment(modalEditData, modalEditData.id).then((res) => {
+    console.log("modalEditData", modalEditData);
+    apiUpdateTask(modalEditData, modalEditData.id).then((res) => {
       if (res.status === 200) {
         setModalEditShow(false);
-        refetchEquipments();
+        refetchTasks();
       }
     });
   };
 
   //! удаление задачи
   const funDelete = (id) => {
-    apiDeleteEquipment(id).then((res) => {
+    apiDeleteTask(id).then((res) => {
       if (res.status === 200) {
-        refetchEquipments();
+        refetchTasks();
       }
     });
   };
 
   return (
-    <div className={styles.Equipments}>
+    <div className={styles.Tasks}>
       <h1>Задачи</h1>
       <ModalAddOfice
         show={modalShow}
@@ -143,16 +142,44 @@ function Equipments() {
             key: "projectId",
             value: ["name"],
           },
+          statuss: {
+            data: [
+              { name: "Выполнено", id: "Выполнено" },
+              { name: "В работе", id: "В работе" },
+              { name: "На проверке", id: "На проверке" },
+              { name: "Отказ", id: "Отказ" },
+              { name: "Архив", id: "Архив" },
+              { name: "Отложен", id: "Отложен" },
+              { name: "Приостановлено", id: "Приостановлено" },
+            ],
+            key: "status",
+            value: ["name"],
+          },
         }}
       />
       <ModalAddOfice
         show={modalEditShow}
         setShow={setModalEditShow}
         title={"Редактировать задачу"}
-        inputs={addOfficeData}
+        inputs={addOfficeData.filter((item) => item.key !== "projects")}
         data={modalEditData}
         setData={setModalEditData}
         funSave={funUpdate}
+        lists={{
+          statuss: {
+            data: [
+              { name: "Выполнено", id: "Выполнено" },
+              { name: "В работе", id: "В работе" },
+              { name: "На проверке", id: "На проверке" },
+              { name: "Отказ", id: "Отказ" },
+              { name: "Архив", id: "Архив" },
+              { name: "Отложен", id: "Отложен" },
+              { name: "Приостановлено", id: "Приостановлено" },
+            ],
+            key: "status",
+            value: ["name"],
+          },
+        }}
       />
       <HeadBlock
         setModalShow={setModalShow}
@@ -175,4 +202,4 @@ function Equipments() {
   );
 }
 
-export default Equipments;
+export default Tasks;

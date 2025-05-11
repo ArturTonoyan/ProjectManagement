@@ -10,12 +10,10 @@ import { AuthModule } from './auth/auth.module';
 import { FilesModule } from './files/files.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import * as path from 'path';
-import { FloorsModule } from './floors/floors.module';
-import { Floors } from './floors/floors.model';
-import { EquipmentsModule } from './equipments/equipments.module';
-import { Equipment } from './equipments/equipments.model';
-import { ElementsModule } from './elements/elements.module';
-import { Element } from './elements/elements.model';
+import { LaborcostsModule } from './floors/laborcosts.module';
+import { Laborcosts } from './floors/laborcosts.model';
+import { TasksModule } from './equipments/tasks.module';
+import { Task } from './equipments/tasks.model';
 import { Project } from './offices/projects.model';
 import { ProjectsModule } from './offices/projects.module';
 import { ProjectsUsers } from './offices/projects-users.model';
@@ -38,16 +36,7 @@ import { ProjectsUsers } from './offices/projects-users.model';
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
-      models: [
-        User,
-        Role,
-        UserRoles,
-        Project,
-        Floors,
-        Equipment,
-        Element,
-        ProjectsUsers,
-      ],
+      models: [User, Role, UserRoles, Project, Laborcosts, Task, ProjectsUsers],
       autoLoadModels: true,
     }),
     UsersModule,
@@ -55,9 +44,8 @@ import { ProjectsUsers } from './offices/projects-users.model';
     AuthModule,
     FilesModule,
     ProjectsModule,
-    FloorsModule,
-    EquipmentsModule,
-    ElementsModule,
+    LaborcostsModule,
+    TasksModule,
   ],
 })
 export class AppModule {}

@@ -12,54 +12,37 @@ function LeftMenu() {
   const navigate = useNavigate();
 
   const listMenu = [
-    // {
-    //   icon: officeIcon,
-    //   title: "Компания",
-    //   navigate: "/admin",
-    // },
     {
       icon: officeIcon,
       title: "Проекты",
-      navigate: "/admin/offices",
+      navigate: "/home",
     },
     {
       icon: deviceIcon,
       title: "Задачи",
-      navigate: "/admin/equipments",
+      navigate: "/home/tasks",
     },
     {
       icon: officeIcon,
       title: "Трудозатраты",
-      navigate: "/admin/floors",
+      navigate: "/home/floors",
     },
 
     {
       icon: personsIcon,
       title: "Сотрудники",
-      navigate: "/admin/users",
+      navigate: "/home/users",
     },
-
-    // {
-    //   icon: errorsIcon,
-    //   title: "Неполадки",
-    //   navigate: "/admin/problems",
-    // },
-    // {
-    //   icon: errorsIcon,
-    //   title: "ТО",
-    //   navigate: "/admin/to",
-    // },
   ];
 
   return (
     <div className={styles.LeftMenu}>
       <div className={styles.logotype}>
-        <img src={logoIcon} alt="Логотип" onClick={() => navigate("/")} />
+        <img src={logoIcon} alt="Логотип" onClick={() => navigate("/home")} />
       </div>
       <div className={styles.content}>
         <div className={styles.container}>
           <div className={styles.tables_box}>
-            <span>Таблицы</span>
             <ul className={styles.list_item}>
               {listMenu.map((item, index) => (
                 <li key={index} onClick={() => navigate(item.navigate)}>
@@ -69,22 +52,10 @@ function LeftMenu() {
               ))}
             </ul>
           </div>
-          <div className={styles.constructor_box}>
-            <ul className={styles.list_item}>
-              <li onClick={() => navigate("/constructor")}>
-                <img src={constructorIcon} alt="img" />
-                <span>Конструктор</span>
-              </li>
-            </ul>
-          </div>
         </div>
         <div className={styles.container_bottom}>
           <ul className={styles.list_item}>
-            <li>
-              <img src={paramIcon} alt="img" />
-              <span>Настройки</span>
-            </li>
-            <li>
+            <li onClick={() => navigate("/profile")}>
               <img src={userIcon} alt="img" />
               <span>Профиль</span>
             </li>

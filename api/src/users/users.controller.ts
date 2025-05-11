@@ -31,7 +31,6 @@ export class UsersController {
     return this.usersService.createUser(userDto);
   }
 
-  @Roles('ADMIN') //! ограничение по ролям
   @Post('create')
   createUser(@Body() userDto: CreateUserDto) {
     return this.usersService.createUserAdmin(userDto);
@@ -44,7 +43,6 @@ export class UsersController {
     return this.usersService.getOneUser(userId);
   }
 
-  @Roles('ADMIN')
   @UseGuards(RolesGuard)
   @Post('/role')
   addRole(@Body() dto: AddRoleDto) {
@@ -63,16 +61,23 @@ export class UsersController {
     return this.usersService.updateUser(userId, updateUserDto, image); // Обновление пользователя
   }
 
-  @Roles('ADMIN')
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.usersService.removeUser(id);
   }
 
-  @Roles('ADMIN')
   @Put(':id')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.updateUserId(id, updateUserDto);
+  }
+
+  @Post(':id/avatar')
+  @UseInterceptors(FileInterceptor('image'))
+  uploadAvatar(
+    @Param('id') id: string,
+    @UploadedFile() image: Express.Multer.File,
+  ) {
+    return this.usersService.updateUserAvatar(id, image);
   }
 
   @Get()

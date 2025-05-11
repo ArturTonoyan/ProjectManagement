@@ -135,9 +135,9 @@ function Offices() {
       funDeleteOffice(param.row.id);
     }
     if (param.key === "tasks") {
-      const filterObj = [{ key: "office", value: param.row.name }];
+      const filterObj = [{ key: "project", value: param.row.name }];
       const filterStr = encodeURIComponent(JSON.stringify(filterObj));
-      navigate(`/admin/equipments?filter=${filterStr}`);
+      navigate(`/tasks?filter=${filterStr}`);
     }
   };
 

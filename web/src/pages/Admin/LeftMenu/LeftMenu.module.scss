@@ -36,6 +36,7 @@
   left: 0;
   .logotype {
     margin: 20px;
+    margin-left: 10px;
     img {
       cursor: pointer;
     }
@@ -58,7 +59,6 @@
       margin: 0;
       padding-top: 20px;
       list-style: none;
-      border-bottom: 1px solid #c7c7c7;
       li {
         @include menuItem;
       }
@@ -74,6 +74,7 @@
   .container_bottom {
     margin-top: 18px;
     padding-right: 20px;
+    padding-bottom: 40px;
     ul {
       padding: 0;
       margin: 0;

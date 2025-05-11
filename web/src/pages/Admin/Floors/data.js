@@ -14,42 +14,37 @@ export const paramMenu = [
     icon: trashICon,
     key: "delete",
   },
-  {
-    name: "Сотрудники",
-    icon: userIcon,
-    key: "users",
-  },
-  {
-    name: "Оборудование",
-    icon: deviceIcon,
-    key: "devices",
-  },
+  // {
+  //   name: "Сотрудники",
+  //   icon: userIcon,
+  //   key: "users",
+  // },
+  // {
+  //   name: "Оборудование",
+  //   icon: deviceIcon,
+  //   key: "devices",
+  // },
 ];
 
 export const addFloorData = [
   {
-    name: "Проект",
-    key: "office",
-    type: "text",
-  },
-  {
     name: "Задача",
-    key: "office",
+    key: "task",
     type: "text",
   },
   {
     name: "Комментарии",
-    key: "office",
+    key: "comments",
     type: "text",
   },
   {
     name: "Затраты",
-    key: "office",
-    type: "text",
+    key: "costs",
+    type: "number",
   },
   {
-    name: "Статус",
-    key: "office",
+    name: "Деятельность",
+    key: "activity",
     type: "text",
   },
 ];
@@ -66,23 +61,18 @@ export const tableHeader = [
     type: "text",
   },
   {
-    name: "Должность",
-    key: "name",
-    type: "text",
-  },
-  {
     name: "Дата",
     key: "date",
     type: "text",
   },
   {
     name: "Проект",
-    key: "office",
+    key: "project",
     type: "text",
   },
   {
     name: "Задача",
-    key: "equipment",
+    key: "task",
     type: "text",
   },
   {
@@ -93,11 +83,11 @@ export const tableHeader = [
   {
     name: "Затраты",
     key: "costs",
-    type: "text",
+    type: "number",
   },
   {
-    name: "Статус",
-    key: "status",
+    name: "Деятельность",
+    key: "activity",
     type: "text",
   },
 ];

@@ -28,7 +28,7 @@ export const addOfficeData = [
   },
   {
     name: "Статус",
-    key: "status",
+    key: "statuss",
     type: "text",
   },
   {
@@ -36,20 +36,21 @@ export const addOfficeData = [
     key: "projects",
     type: "text",
   },
-  {
-    name: "Описание",
-    key: "description",
-    type: "text",
-  },
+
   {
     name: "Оценка временных затрат",
     key: "maxTimeCost",
-    type: "text",
+    type: "number",
   },
   {
     name: "Готовность",
     key: "state",
     type: "number",
+  },
+  {
+    name: "Описание",
+    key: "description",
+    type: "descr",
   },
 ];
 

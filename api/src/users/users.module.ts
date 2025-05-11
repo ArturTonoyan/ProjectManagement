@@ -8,8 +8,8 @@ import { UserRoles } from 'src/roles/user-roles.model';
 import { RolesModule } from 'src/roles/roles.module';
 import { AuthModule } from 'src/auth/auth.module';
 import { FilesModule } from 'src/files/files.module';
-import { Equipment } from 'src/equipments/equipments.model';
-import { Floors } from 'src/floors/floors.model';
+import { Task } from 'src/equipments/tasks.model';
+import { Laborcosts } from 'src/floors/laborcosts.model';
 import { Project } from 'src/offices/projects.model';
 
 @Module({
@@ -21,8 +21,8 @@ import { Project } from 'src/offices/projects.model';
       Role,
       UserRoles,
       Project,
-      Equipment,
-      Floors,
+      Task,
+      Laborcosts,
     ]),
     RolesModule,
     forwardRef(() => AuthModule),
