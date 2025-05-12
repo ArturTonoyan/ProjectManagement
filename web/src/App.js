@@ -20,10 +20,16 @@ function App() {
   const userRole = useSelector(
     (state) => state.user.user.data?.roles?.[0]?.value
   );
+  const user = useSelector((state) => state.user.user.data);
 
   const funUpdUser = () => {
+    if (!localStorage.getItem("accessToken")) return;
     apiGetUser().then((res) => {
-      dispatch(setUserData({ data: res.data }));
+      if (res?.status !== 200) {
+        dispatch(setUserData({ data: null }));
+      } else {
+        dispatch(setUserData({ data: res?.data }));
+      }
     });
   };
 
@@ -37,7 +43,7 @@ function App() {
         <main>
           <Routes>
             <Route
-              path="/"
+              path="/authorization"
               element={<Authorization funUpdUser={funUpdUser} />}
             ></Route>
             <Route
@@ -48,16 +54,34 @@ function App() {
               path="/profile"
               element={<Profile funUpdUser={funUpdUser} />}
             ></Route>
-            {userRole === "ADMIN" && (
+            {
               <>
-                <Route path="/home" element={<Admin />}>
-                  <Route path="" element={<Offices />}></Route>
+                <Route
+                  path="/"
+                  element={
+                    user?.email ? (
+                      <Admin />
+                    ) : (
+                      <Authorization funUpdUser={funUpdUser} />
+                    )
+                  }
+                >
+                  <Route
+                    path=""
+                    element={
+                      user?.email ? (
+                        <Offices />
+                      ) : (
+                        <Authorization funUpdUser={funUpdUser} />
+                      )
+                    }
+                  ></Route>
                   <Route path="floors" element={<Floors />}></Route>
                   <Route path="users" element={<Users />}></Route>
                   <Route path="tasks" element={<Equipments />}></Route>
                 </Route>
               </>
-            )}
+            }
           </Routes>
         </main>
       </BrowserRouter>

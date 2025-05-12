@@ -36,7 +36,7 @@ function Authorization({ funUpdUser }) {
         </div>
         <div className={styles.form}>
           {inputs.map((item, index) => (
-            <div className={styles.input_box} name={item.key}>
+            <div className={styles.input_box} name={item.key} key={index}>
               <input
                 key={index}
                 type={item.type}

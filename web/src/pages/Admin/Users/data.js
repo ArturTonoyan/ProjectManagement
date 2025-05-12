@@ -1,6 +1,5 @@
 import trashICon from "@assets/images/icons/trash.svg";
 import editIcon from "@assets/images/icons/edit.svg";
-import deviceIcon from "@assets/images/leftMenu/device.svg";
 
 export const paramMenu = [
   {
@@ -12,10 +11,6 @@ export const paramMenu = [
     name: "Удалить",
     icon: trashICon,
     key: "delete",
-  },
-  {
-    name: "Оборудование",
-    icon: deviceIcon,
   },
 ];
 

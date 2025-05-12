@@ -20,23 +20,29 @@ export const apiRequest = async (
     return response;
   } catch (error) {
     console.error("Ошибка при выполнении запроса:", error);
-    throw error; // Пробрасываем ошибку дальше для обработки
+    return error;
   }
 };
 
 //! Запрос на регистрацию
 export const apiRegister = async (data) => {
   const response = await apiRequest("post", "/auth/register", data);
-  const { token } = response.data;
-  localStorage.setItem("accessToken", token);
+  if (response?.status === 201) {
+    const { token } = response?.data;
+    localStorage.setItem("accessToken", token);
+  }
+
   return response;
 };
 
 //! Запрос на авторизацию
 export const apiLogin = async (data) => {
   const response = await apiRequest("post", "/auth/login", data);
-  const { token } = response.data;
-  localStorage.setItem("accessToken", token);
+  if (response?.status === 201) {
+    const { token } = response?.data;
+    localStorage.setItem("accessToken", token);
+  }
+
   return response;
 };
 

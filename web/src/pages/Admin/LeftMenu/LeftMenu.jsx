@@ -15,30 +15,30 @@ function LeftMenu() {
     {
       icon: officeIcon,
       title: "Проекты",
-      navigate: "/home",
+      navigate: "/",
     },
     {
       icon: deviceIcon,
       title: "Задачи",
-      navigate: "/home/tasks",
+      navigate: "/tasks",
     },
     {
       icon: officeIcon,
       title: "Трудозатраты",
-      navigate: "/home/floors",
+      navigate: "/floors",
     },
 
     {
       icon: personsIcon,
       title: "Сотрудники",
-      navigate: "/home/users",
+      navigate: "/users",
     },
   ];
 
   return (
     <div className={styles.LeftMenu}>
       <div className={styles.logotype}>
-        <img src={logoIcon} alt="Логотип" onClick={() => navigate("/home")} />
+        <img src={logoIcon} alt="Логотип" onClick={() => navigate("/")} />
       </div>
       <div className={styles.content}>
         <div className={styles.container}>

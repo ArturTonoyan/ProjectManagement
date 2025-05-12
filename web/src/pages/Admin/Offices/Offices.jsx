@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react";
 import styles from "./Offices.module.scss";
-import { addOfficeData, paramMenu, tableHeader, typeOwnerships } from "./data";
+import {
+  addOfficeData,
+  paramMenu,
+  paramMenuUser,
+  tableHeader,
+  typeOwnerships,
+} from "./data";
 import HeadBlock from "./HeadBlock/HeadBlock";
 import ModalAddOfice from "../../../modules/ModalAddOfice/ModalAddOfice";
 import Table from "../../../modules/Table/Table";
@@ -230,7 +236,9 @@ function Offices() {
           setTableData={setTableData}
           direction={[]}
           setModalShow={setModalShow}
-          paramMenu={paramMenu}
+          paramMenu={
+            user?.roles?.[0]?.value === "ADMIN" ? paramMenu : paramMenuUser
+          }
           tableHeader={tableHeader}
           funClick={funParamClick}
         />

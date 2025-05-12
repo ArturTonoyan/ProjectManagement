@@ -26,6 +26,13 @@ export const paramMenu = [
     key: "tasks",
   },
 ];
+export const paramMenuUser = [
+  {
+    name: "Задачи",
+    icon: officeIcon,
+    key: "tasks",
+  },
+];
 
 export const addOfficeData = [
   {

@@ -1,7 +1,9 @@
+import { useSelector } from "react-redux";
 import styles from "./HeadBlock.module.scss";
 import lupa from "@assets/images/icons/lupa.svg";
 
 function HeadBlock({ shearchParam, setShearchParam, setModalShow }) {
+  const user = useSelector((state) => state.user.user.data);
   return (
     <div className={styles.HeadBlock}>
       <div className={styles.left_block}>
@@ -13,11 +15,13 @@ function HeadBlock({ shearchParam, setShearchParam, setModalShow }) {
           placeholder="Поиск"
         />
       </div>
-      <div className={styles.right_block}>
-        <button className={styles.save} onClick={() => setModalShow(true)}>
-          + Добавить проект
-        </button>
-      </div>
+      {user?.roles?.[0]?.value === "ADMIN" && (
+        <div className={styles.right_block}>
+          <button className={styles.save} onClick={() => setModalShow(true)}>
+            + Добавить проект
+          </button>
+        </div>
+      )}
     </div>
   );
 }

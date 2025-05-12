@@ -45,43 +45,55 @@ function CustomTable({
   }, [tableData, parsedFilter]);
 
   // Колонки
-  const columns = [
-    {
-      field: "actions",
-      headerName: "Действия",
-      width: 80,
-      sortable: false,
-      filterable: false,
-      renderCell: (params) => (
-        <div className={styles.direction_container}>
-          <IconButton
-            onClick={(e) => {
-              e.stopPropagation();
-              setOpenList(params.id);
-              setAnchorEl(e.currentTarget);
-            }}
-          >
-            <MoreVertIcon />
-          </IconButton>
-          <ParamContextMenu
-            openList={openList === params.id}
-            setOpenList={() => setOpenList(null)}
-            anchorEl={anchorEl}
-            paramMenu={paramMenu}
-            funClick={funClick}
-            row={params.row}
-          />
-        </div>
-      ),
-    },
-    ...tableHeader.map((col) => ({
-      field: col.key,
-      headerName: col.name,
-      width: col.width || 200,
-      sortable: true,
-      filterable: true,
-    })),
-  ];
+
+  const columns =
+    paramMenu?.length > 0
+      ? [
+          {
+            field: "actions",
+            headerName: "Действия",
+            width: 80,
+            sortable: false,
+            filterable: false,
+            renderCell: (params) => (
+              <div className={styles.direction_container}>
+                <IconButton
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setOpenList(params.id);
+                    setAnchorEl(e.currentTarget);
+                  }}
+                >
+                  <MoreVertIcon />
+                </IconButton>
+                <ParamContextMenu
+                  openList={openList === params.id}
+                  setOpenList={() => setOpenList(null)}
+                  anchorEl={anchorEl}
+                  paramMenu={paramMenu}
+                  funClick={funClick}
+                  row={params.row}
+                />
+              </div>
+            ),
+          },
+          ...tableHeader.map((col) => ({
+            field: col.key,
+            headerName: col.name,
+            width: col.width || 200,
+            sortable: true,
+            filterable: true,
+          })),
+        ]
+      : [
+          ...tableHeader.map((col) => ({
+            field: col.key,
+            headerName: col.name,
+            width: col.width || 200,
+            sortable: true,
+            filterable: true,
+          })),
+        ];
 
   // Преобразуем данные (DataGrid требует поле `id`)
   const rows = filteredData.map((row, index) => ({

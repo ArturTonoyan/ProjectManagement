@@ -158,7 +158,7 @@ function Users() {
           setTableData={setTableData}
           direction={[]}
           setModalShow={setModalShow}
-          paramMenu={paramMenu}
+          paramMenu={user?.roles?.[0]?.value === "ADMIN" ? paramMenu : []}
           funClick={funParamClick}
           tableHeader={tableHeader}
         />
