@@ -20,6 +20,7 @@ import {
 import { useSelector } from "react-redux";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import ModalUsers from "./ModalUsers/ModalUsers";
 
 function Offices() {
   const navigate = useNavigate();
@@ -32,6 +33,7 @@ function Offices() {
   const [modalEditData, setModalEditData] = useState({});
   const [modalEditInputData, setModalEditInputData] = useState({});
   const [createOfficeData, setCreateOfficeData] = useState({});
+  const [modalUsersData, setModalUsersData] = useState(null);
 
   const {
     status,
@@ -68,10 +70,15 @@ function Offices() {
           el?.users?.find((u) => u.id === el.directorId)
         ),
         renter: funGetUserFio(el?.users?.find((u) => u.id === el.renterId)),
-        usersCount: el?.users?.length,
+        usersCount: el?.users
+          ?.map((u) => u.surname + " " + u.name + " " + u.patronymic)
+          .join(", \n"),
         floorsCount: el?.floors?.length,
         devices: el?.eqipments?.length,
       }));
+      if (user?.roles[0]?.value !== "ADMIN") {
+        tabDat = tabDat.filter((el) => el.users.find((u) => u.id === user.id));
+      }
       tabDat.map((el) => {
         Object.keys(el).forEach((key) => {
           if (
@@ -145,6 +152,9 @@ function Offices() {
       const filterStr = encodeURIComponent(JSON.stringify(filterObj));
       navigate(`/tasks?filter=${filterStr}`);
     }
+    if (param.key === "users") {
+      setModalUsersData(param.row);
+    }
   };
 
   //! обновление проекта
@@ -170,6 +180,12 @@ function Offices() {
   return (
     <div className={styles.Offices}>
       <h1>Проекты</h1>
+      <ModalUsers
+        modalUsersData={modalUsersData}
+        setModalUsersData={setModalUsersData}
+        refetch={refetch}
+        query={query}
+      />
       <ModalAddOfice
         show={modalShow}
         setShow={setModalShow}

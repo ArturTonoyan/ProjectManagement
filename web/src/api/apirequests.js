@@ -146,6 +146,11 @@ export const apiGetUsers = async () => {
   return await apiRequest("get", `/users`);
 };
 
+//! добавление пользователей в проект
+export const apiAddUsers = async (id, data) => {
+  return await apiRequest("post", `/projects/users/add/${id}`, data);
+};
+
 //! получение всех задач
 export const apiGetTasks = async () => {
   return await apiRequest("get", `/tasks`);

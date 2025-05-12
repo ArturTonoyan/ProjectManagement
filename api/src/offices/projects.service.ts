@@ -1,6 +1,7 @@
 import { InjectModel } from '@nestjs/sequelize';
 import { Project } from './projects.model';
 import {
+  BadRequestException,
   Injectable,
   InternalServerErrorException,
   NotFoundException,
@@ -71,6 +72,7 @@ export class ProjectsService {
       throw new InternalServerErrorException(error.message);
     }
   }
+
   async update(id: string, dto: UpdateProjectsDto) {
     const transaction = await this.sequelize.transaction();
 
@@ -122,6 +124,60 @@ export class ProjectsService {
       await transaction.rollback();
       console.error('Ошибка при обновлении проекта:', error);
       throw new InternalServerErrorException('Не удалось обновить проект');
+    }
+  }
+
+  async addUsers(id: string, dto: UpdateProjectsDto) {
+    const transaction = await this.sequelize.transaction();
+
+    try {
+      const project = await this.projectRepository.findByPk(id, {
+        transaction,
+      });
+
+      if (!project) {
+        throw new NotFoundException('Проект не найден');
+      }
+
+      // Добавляем каждого пользователя по связи projects_users
+      for (const user of dto.users) {
+        const { id: userId, role } = user;
+        // Проверим, существует ли уже такая связь
+        const existingRelation = await this.projectsUsersRepository.findOne({
+          where: {
+            projectId: id,
+            userId,
+          },
+          transaction,
+        });
+
+        if (existingRelation) {
+          // Обновляем роль, если нужно
+          if (existingRelation.role !== role) {
+            existingRelation.role = role;
+            await existingRelation.save({ transaction });
+          }
+        } else {
+          // Создаем новую связь
+          await this.projectsUsersRepository.create(
+            {
+              projectId: id,
+              userId,
+              role,
+            },
+            { transaction },
+          );
+        }
+      }
+
+      await transaction.commit();
+      return { message: 'Пользователи успешно добавлены к проекту' };
+    } catch (error) {
+      await transaction.rollback();
+      console.error('Ошибка при добавлении пользователей к проекту:', error);
+      throw new InternalServerErrorException(
+        'Не удалось добавить пользователей к проекту',
+      );
     }
   }
 

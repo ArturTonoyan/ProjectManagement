@@ -56,7 +56,17 @@ function CustomTable({
             sortable: false,
             filterable: false,
             renderCell: (params) => (
-              <div className={styles.direction_container}>
+              <div
+                className={styles.direction_container}
+                style={{
+                  whiteSpace: "normal",
+                  wordBreak: "break-word",
+                  paddingBottom: "10px",
+                  display: "flex",
+                  alignItems: "center",
+                  height: "100%",
+                }}
+              >
                 <IconButton
                   onClick={(e) => {
                     e.stopPropagation();
@@ -83,6 +93,20 @@ function CustomTable({
             width: col.width || 200,
             sortable: true,
             filterable: true,
+            renderCell: (params) => (
+              <div
+                style={{
+                  whiteSpace: "normal",
+                  wordBreak: "break-word",
+                  paddingBottom: "10px",
+                  display: "flex",
+                  alignItems: "center",
+                  height: "100%",
+                }}
+              >
+                {params.value}
+              </div>
+            ),
           })),
         ]
       : [
@@ -92,6 +116,11 @@ function CustomTable({
             width: col.width || 200,
             sortable: true,
             filterable: true,
+            renderCell: (params) => (
+              <div style={{ whiteSpace: "normal", wordBreak: "break-word" }}>
+                {params.value}
+              </div>
+            ),
           })),
         ];
 
@@ -114,6 +143,7 @@ function CustomTable({
           disableRowSelectionOnClick
           sortingOrder={["asc", "desc"]}
           filterMode="client"
+          getRowHeight={() => "auto"} // ← авто-высота
           localeText={ruRU.components.MuiDataGrid.defaultProps.localeText}
         />
       </Box>

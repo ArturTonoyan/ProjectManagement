@@ -14,16 +14,6 @@ export const paramMenu = [
     icon: trashICon,
     key: "delete",
   },
-  // {
-  //   name: "Сотрудники",
-  //   icon: userIcon,
-  //   key: "users",
-  // },
-  // {
-  //   name: "Оборудование",
-  //   icon: deviceIcon,
-  //   key: "devices",
-  // },
 ];
 
 export const addFloorData = [

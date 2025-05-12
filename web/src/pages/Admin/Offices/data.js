@@ -25,6 +25,11 @@ export const paramMenu = [
     icon: officeIcon,
     key: "tasks",
   },
+  {
+    name: "Участники",
+    icon: userIcon,
+    key: "users",
+  },
 ];
 export const paramMenuUser = [
   {

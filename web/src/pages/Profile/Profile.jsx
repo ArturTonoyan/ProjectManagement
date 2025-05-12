@@ -168,7 +168,7 @@ function Profile({ funUpdUser }) {
         </Box>
 
         <Stack spacing={2} sx={{ mt: 2 }}>
-          {Object.entries(formData).map(([key, value]) =>
+          {Object.entries(formData)?.map(([key, value]) =>
             isEditing ? (
               <TextField
                 key={key}
@@ -225,7 +225,7 @@ function Profile({ funUpdUser }) {
           Проекты
         </Typography>
         <Grid container spacing={2}>
-          {(showProjects ? user?.projects : user?.projects?.slice(0, 2)).map(
+          {(showProjects ? user?.projects : user?.projects?.slice(0, 2))?.map(
             (p) => (
               <Grid item xs={12} sm={6} key={p.id}>
                 <Card
@@ -264,7 +264,7 @@ function Profile({ funUpdUser }) {
           Задачи
         </Typography>
         <Grid container spacing={2}>
-          {(showTasks ? user?.tasks : user?.tasks.slice(0, 2)).map((t) => (
+          {(showTasks ? user?.tasks : user?.tasks?.slice(0, 2))?.map((t) => (
             <Grid item xs={12} sm={6} key={t.id}>
               <Card
                 sx={{
@@ -311,7 +311,7 @@ function Profile({ funUpdUser }) {
           Трудозатраты
         </Typography>
         <Stack spacing={1}>
-          {(showLabor ? user?.laborcosts : user?.laborcosts.slice(0, 2)).map(
+          {(showLabor ? user?.laborcosts : user?.laborcosts?.slice(0, 2))?.map(
             (l) => (
               <Box
                 key={l.id}

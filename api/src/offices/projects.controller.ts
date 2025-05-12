@@ -49,6 +49,13 @@ export class ProjectsController {
   }
 
   @Roles('ADMIN')
+  @Post('users/add/:id')
+  @UseGuards(JwtAuthGuard)
+  addUsers(@Body() dto: UpdateProjectsDto, @Param('id') id: string) {
+    return this.projectsService.addUsers(id, dto);
+  }
+
+  @Roles('ADMIN')
   @Delete(':id')
   @UseGuards(JwtAuthGuard)
   delete(@Param('id') id: string) {

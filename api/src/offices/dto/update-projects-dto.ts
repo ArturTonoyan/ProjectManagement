@@ -5,4 +5,5 @@ export class UpdateProjectsDto {
   readonly name: string;
   directorId?: string;
   description?: string;
+  users?: any[];
 }
