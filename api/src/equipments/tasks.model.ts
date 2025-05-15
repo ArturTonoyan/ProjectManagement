@@ -6,6 +6,7 @@ import {
   Table,
   BelongsTo,
   HasMany,
+  BelongsToMany,
 } from 'sequelize-typescript';
 import { Laborcosts } from 'src/floors/laborcosts.model';
 import { Project } from 'src/offices/projects.model';
@@ -49,8 +50,17 @@ export class Task extends Model<Task, TaskCreationAttrs> {
   })
   authorId: string;
 
-  @BelongsTo(() => User)
-  author: User; // 👈 добавлено
+  @ForeignKey(() => User)
+  @Column({
+    type: DataType.UUID,
+  })
+  userId: string;
+
+  @BelongsTo(() => User, 'authorId')
+  author: User;
+
+  @BelongsTo(() => User, 'userId')
+  user: User;
 
   @ForeignKey(() => Project)
   @Column({

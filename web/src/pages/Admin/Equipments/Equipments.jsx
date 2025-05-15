@@ -61,6 +61,12 @@ function Tasks() {
   });
 
   useEffect(() => {
+    refetchTasks();
+    refetchUsers();
+    refetchprojects();
+  }, []);
+
+  useEffect(() => {
     if (equipments?.data) {
       const qdat = equipments?.data.map((item) => ({
         ...item,
@@ -71,6 +77,15 @@ function Tasks() {
           item?.author?.surname +
           " " +
           item?.author?.patronymic,
+        user:
+          item?.user?.name +
+          " " +
+          item?.user?.surname +
+          " " +
+          item?.user?.patronymic,
+        currentTimeCost: item?.laborcosts
+          ?.map((el) => el?.costs)
+          .reduce((a, b) => Number(a) + Number(b), 0),
       }));
       setTableData(qdat);
       setOriginalData(qdat);
@@ -99,7 +114,7 @@ function Tasks() {
       funDelete(param.row.id);
     }
     if (param.key === "laborCosts") {
-      const filterObj = [{ key: "equipment", value: param.row.name }];
+      const filterObj = [{ key: "task", value: param.row.name }];
       const filterStr = encodeURIComponent(JSON.stringify(filterObj));
       navigate(`/floors?filter=${filterStr}`);
     }
@@ -142,6 +157,11 @@ function Tasks() {
             key: "projectId",
             value: ["name"],
           },
+          user: {
+            data: users?.data,
+            key: "userId",
+            value: ["name", "surname", "patronymic"],
+          },
           statuss: {
             data: [
               { name: "Выполнено", id: "Выполнено" },
@@ -178,6 +198,11 @@ function Tasks() {
             ],
             key: "status",
             value: ["name"],
+          },
+          user: {
+            data: users?.data,
+            key: "userId",
+            value: ["name", "surname", "patronymic"],
           },
         }}
       />

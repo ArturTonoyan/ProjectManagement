@@ -49,6 +49,11 @@ function Floors() {
   });
 
   useEffect(() => {
+    refetchFloors();
+    refetch();
+  }, []);
+
+  useEffect(() => {
     if (laborcosts?.data) {
       const qdat = laborcosts?.data.map((item) => ({
         ...item,

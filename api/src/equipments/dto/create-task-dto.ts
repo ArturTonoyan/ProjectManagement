@@ -5,4 +5,5 @@ export class CreateTaskDto {
   readonly name?: string;
   authorId?: string;
   projectId?: string;
+  userId?: string;
 }

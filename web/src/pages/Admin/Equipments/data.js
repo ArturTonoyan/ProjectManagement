@@ -36,7 +36,11 @@ export const addOfficeData = [
     key: "projects",
     type: "text",
   },
-
+  {
+    name: "Назначена",
+    key: "user",
+    type: "text",
+  },
   {
     name: "Оценка временных затрат",
     key: "maxTimeCost",
@@ -63,6 +67,10 @@ export const tableHeader = [
   {
     name: "Название",
     key: "name",
+  },
+  {
+    name: "Назначена",
+    key: "user",
   },
   {
     name: "Статус",
