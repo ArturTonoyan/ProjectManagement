@@ -69,6 +69,7 @@ function Offices() {
         directorId: funGetUserFio(
           el?.users?.find((u) => u.id === el.directorId)
         ),
+        director: funGetUserFio(el?.users?.find((u) => u.id === el.directorId)),
         renter: funGetUserFio(el?.users?.find((u) => u.id === el.renterId)),
         usersCount: el?.users
           ?.map((u) => u.surname + " " + u.name + " " + u.patronymic)

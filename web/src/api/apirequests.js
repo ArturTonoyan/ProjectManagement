@@ -151,6 +151,11 @@ export const apiAddUsers = async (id, data) => {
   return await apiRequest("post", `/projects/users/add/${id}`, data);
 };
 
+//! удаление пользователя из проекта
+export const apiRemoveUser = async (id, data) => {
+  return await apiRequest("post", `/projects/users/delete/${id}`, data);
+};
+
 //! получение всех задач
 export const apiGetTasks = async () => {
   return await apiRequest("get", `/tasks`);

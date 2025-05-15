@@ -15,9 +15,14 @@ import {
 } from "@mui/material";
 import { AddCircle } from "@mui/icons-material";
 import { useQuery } from "@tanstack/react-query";
-import { apiAddUsers, apiGetUsers } from "../../../../api/apirequests";
+import {
+  apiAddUsers,
+  apiGetUsers,
+  apiRemoveUser,
+} from "../../../../api/apirequests";
 import { server } from "../../../../api/apirequests";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { Delete } from "@mui/icons-material"; // ← добавим иконку
 
 function ModalUsers({ modalUsersData, setModalUsersData, refetch, query }) {
   const [showAllUsers, setShowAllUsers] = useState(false);
@@ -48,6 +53,16 @@ function ModalUsers({ modalUsersData, setModalUsersData, refetch, query }) {
     }
   }, [query]);
 
+  const handleRemoveUser = (userId) => {
+    apiRemoveUser(modalUsersData.id, {
+      users: [{ id: userId }],
+    }).then((res) => {
+      if (res?.status === 201 || res?.status === 204) {
+        refetch();
+      }
+    });
+  };
+
   return (
     <Dialog
       open={!!modalUsersData}
@@ -71,7 +86,20 @@ function ModalUsers({ modalUsersData, setModalUsersData, refetch, query }) {
       <DialogContent dividers>
         <List>
           {modalUsersData?.users?.map((user) => (
-            <ListItem key={user.id} alignItems="flex-start">
+            <ListItem
+              key={user.id}
+              secondaryAction={
+                <Tooltip title="Удалить участника">
+                  <IconButton
+                    edge="end"
+                    color="error"
+                    onClick={() => handleRemoveUser(user.id)}
+                  >
+                    <Delete />
+                  </IconButton>
+                </Tooltip>
+              }
+            >
               <ListItemAvatar>
                 <Avatar src={`${server}/${user?.image}`} />
               </ListItemAvatar>

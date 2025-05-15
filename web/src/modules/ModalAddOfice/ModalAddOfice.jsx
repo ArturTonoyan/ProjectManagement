@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import styles from "./ModalAddOfice.module.scss";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { formatPhoneNumber } from "../../utils/validations/Validations";
 import TextField from "@mui/material/Input";
 
@@ -17,6 +17,20 @@ function ModalAddOfice({
   lists,
 }) {
   const [openList, setOpenList] = useState(null);
+  const listRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (listRef.current && !listRef.current.contains(event.target)) {
+        setOpenList(null);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   const funChange = (type, key, value) => {
     if (type === "file") {
       setData({ ...data, [key]: document?.getElementById(key)?.files[0] });
@@ -107,7 +121,7 @@ function ModalAddOfice({
                       </div>
                     )}
                     {openList === item.key && lists[item.key] && (
-                      <div className={styles.list}>
+                      <div className={styles.list} ref={listRef}>
                         {lists[item.key]?.data?.map((elem, ind) => (
                           <div
                             className={styles.item}

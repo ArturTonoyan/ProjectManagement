@@ -56,6 +56,13 @@ export class ProjectsController {
   }
 
   @Roles('ADMIN')
+  @Post('users/delete/:id')
+  @UseGuards(JwtAuthGuard)
+  deleteUsers(@Body() dto: UpdateProjectsDto, @Param('id') id: string) {
+    return this.projectsService.deleteUsers(id, dto);
+  }
+
+  @Roles('ADMIN')
   @Delete(':id')
   @UseGuards(JwtAuthGuard)
   delete(@Param('id') id: string) {

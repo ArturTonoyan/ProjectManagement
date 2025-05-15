@@ -181,6 +181,40 @@ export class ProjectsService {
     }
   }
 
+  async deleteUsers(id: string, dto: UpdateProjectsDto) {
+    const transaction = await this.sequelize.transaction();
+    try {
+      const project = await this.projectRepository.findByPk(id, {
+        transaction,
+      });
+      if (!project) {
+        throw new NotFoundException('Проект не найден');
+      }
+      for (const user of dto.users) {
+        const { id: userId } = user;
+        const existingRelation = await this.projectsUsersRepository.findOne({
+          where: {
+            projectId: id,
+            userId,
+          },
+          transaction,
+        });
+
+        if (existingRelation) {
+          await existingRelation.destroy({ transaction });
+        }
+      }
+      await transaction.commit();
+      return { message: 'Пользователи успешно удалены из проекта' };
+    } catch (error) {
+      await transaction.rollback();
+      console.error('Ошибка при удалении пользователей из проекта:', error);
+      throw new InternalServerErrorException(
+        'Не удалось удалить пользователей из проекта',
+      );
+    }
+  }
+
   async delete(id: string) {
     try {
       const project = await this.projectRepository.findOne({ where: { id } });
