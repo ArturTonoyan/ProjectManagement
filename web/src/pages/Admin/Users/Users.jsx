@@ -84,6 +84,7 @@ function Users() {
       if (res.status === 201) {
         setModalShow(false);
         refetchUsers();
+        setCreateUserData({});
       }
     });
   };
@@ -106,6 +107,7 @@ function Users() {
       if (res.status === 200) {
         setModalEditShow(false);
         refetchUsers();
+        setModalEditData({});
       }
     });
   };

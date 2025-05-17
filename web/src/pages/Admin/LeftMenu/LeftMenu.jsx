@@ -23,6 +23,11 @@ function LeftMenu() {
       navigate: "/tasks",
     },
     {
+      icon: errorsIcon,
+      title: "Kanban доска",
+      navigate: "/kanban",
+    },
+    {
       icon: officeIcon,
       title: "Трудозатраты",
       navigate: "/floors",
@@ -32,6 +37,11 @@ function LeftMenu() {
       icon: personsIcon,
       title: "Сотрудники",
       navigate: "/users",
+    },
+    {
+      icon: paramIcon,
+      title: "Аналитика",
+      navigate: "/analitics",
     },
   ];
 

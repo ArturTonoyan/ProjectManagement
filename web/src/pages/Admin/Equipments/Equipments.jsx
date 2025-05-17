@@ -71,18 +71,19 @@ function Tasks() {
       const qdat = equipments?.data.map((item) => ({
         ...item,
         project: item?.project?.name,
+        statuss: item?.status,
         author:
-          item?.author?.name +
+          (item?.author?.name || "") +
           " " +
-          item?.author?.surname +
+          (item?.author?.surname || "") +
           " " +
-          item?.author?.patronymic,
+          (item?.author?.patronymic || ""),
         user:
-          item?.user?.name +
+          (item?.user?.name || "") +
           " " +
-          item?.user?.surname +
+          (item?.user?.surname || "") +
           " " +
-          item?.user?.patronymic,
+          (item?.user?.patronymic || ""),
         currentTimeCost: item?.laborcosts
           ?.map((el) => el?.costs)
           .reduce((a, b) => Number(a) + Number(b), 0),
@@ -164,13 +165,12 @@ function Tasks() {
           },
           statuss: {
             data: [
-              { name: "Выполнено", id: "Выполнено" },
-              { name: "В работе", id: "В работе" },
-              { name: "На проверке", id: "На проверке" },
-              { name: "Отказ", id: "Отказ" },
-              { name: "Архив", id: "Архив" },
-              { name: "Отложен", id: "Отложен" },
-              { name: "Приостановлено", id: "Приостановлено" },
+              { name: "Выполнено", id: "Выполнено", color: "success.main" },
+              { name: "В работе", id: "В работе", color: "info.main" },
+              { name: "На проверке", id: "На проверке", color: "warning.main" },
+              { name: "Отменен", id: "Отменен", color: "error.main" },
+              { name: "Архив", id: "Архив", color: "grey.500" },
+              { name: "Отложен", id: "Отложен", color: "text.disabled" },
             ],
             key: "status",
             value: ["name"],
@@ -188,13 +188,12 @@ function Tasks() {
         lists={{
           statuss: {
             data: [
-              { name: "Выполнено", id: "Выполнено" },
-              { name: "В работе", id: "В работе" },
-              { name: "На проверке", id: "На проверке" },
-              { name: "Отказ", id: "Отказ" },
-              { name: "Архив", id: "Архив" },
-              { name: "Отложен", id: "Отложен" },
-              { name: "Приостановлено", id: "Приостановлено" },
+              { name: "Выполнено", id: "Выполнено", color: "success.main" },
+              { name: "В работе", id: "В работе", color: "info.main" },
+              { name: "На проверке", id: "На проверке", color: "warning.main" },
+              { name: "Отменен", id: "Отменен", color: "error.main" },
+              { name: "Архив", id: "Архив", color: "grey.500" },
+              { name: "Отложен", id: "Отложен", color: "text.disabled" },
             ],
             key: "status",
             value: ["name"],

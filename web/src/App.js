@@ -13,6 +13,8 @@ import { apiGetUser } from "./api/apirequests";
 import { useEffect } from "react";
 import { setUserData } from "./store/userSlice/user.Slice";
 import Profile from "./pages/Profile/Profile";
+import Analitics from "./pages/Admin/Analitics/Analitics";
+import KanbanBoard from "./modules/KanbanBoard/KanbanBoard";
 
 function App() {
   const queryClient = new QueryClient();
@@ -79,6 +81,8 @@ function App() {
                   <Route path="floors" element={<Floors />}></Route>
                   <Route path="users" element={<Users />}></Route>
                   <Route path="tasks" element={<Equipments />}></Route>
+                  <Route path="analitics" element={<Analitics />}></Route>
+                  <Route path="kanban" element={<KanbanBoard />}></Route>
                 </Route>
               </>
             }

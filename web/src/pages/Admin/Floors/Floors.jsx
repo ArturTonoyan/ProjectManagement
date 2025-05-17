@@ -145,7 +145,10 @@ function Floors() {
         inputs={addFloorData}
         lists={{
           task: {
-            data: tasks?.data,
+            data:
+              user?.roles?.[0]?.value !== "ADMIN"
+                ? tasks?.data?.filter((el) => el.userId === user.id)
+                : tasks?.data,
             key: "taskId",
             value: ["name", "address"],
           },
@@ -161,7 +164,10 @@ function Floors() {
         inputs={addFloorData}
         lists={{
           task: {
-            data: tasks?.data,
+            data:
+              user?.roles?.[0]?.value !== "ADMIN"
+                ? tasks?.data?.filter((el) => el.userId === user.id)
+                : tasks?.data,
             key: "taskId",
             value: ["name", "address"],
           },

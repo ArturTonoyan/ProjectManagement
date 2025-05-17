@@ -21,17 +21,41 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   apiDeleteUser,
+  apiGetTasks,
   apiUpdateUser,
   apiUpdateUserAvatar,
   server,
 } from "../../api/apirequests";
 import { setUserData } from "../../store/userSlice/user.Slice";
+import { useQuery } from "@tanstack/react-query";
 
 function Profile({ funUpdUser }) {
+  const [tasksUser, setTasksUser] = useState([]);
+
+  const {
+    status,
+    data: tasks,
+    error,
+    refetch,
+  } = useQuery({
+    queryKey: ["tasks"],
+    queryFn: () => apiGetTasks(),
+    staleTime: Infinity, //! не обновлять
+  });
+
+  useEffect(() => {
+    funUpdUser();
+    refetch();
+  }, []);
+
+  useEffect(() => {
+    setTasksUser(tasks?.data?.filter((task) => task?.userId === user?.id));
+  }, [tasks]);
+
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user.data);
   const [formData, setFormData] = useState({
@@ -264,7 +288,7 @@ function Profile({ funUpdUser }) {
           Задачи
         </Typography>
         <Grid container spacing={2}>
-          {(showTasks ? user?.tasks : user?.tasks?.slice(0, 2))?.map((t) => (
+          {(showTasks ? tasksUser : tasksUser?.slice(0, 2))?.map((t) => (
             <Grid item xs={12} sm={6} key={t.id}>
               <Card
                 sx={{

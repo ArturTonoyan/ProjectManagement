@@ -52,6 +52,10 @@ function Offices() {
     staleTime: Infinity, //! не обновлять
   });
 
+  useEffect(() => {
+    refetch();
+  }, []);
+
   const funGetUserFio = (user) => {
     let fio = `${user?.surname || ""} ${user?.name || ""} ${
       user?.patronymic || ""

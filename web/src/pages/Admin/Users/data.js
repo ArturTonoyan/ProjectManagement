@@ -116,12 +116,4 @@ export const tableHeader = [
     name: "Роль",
     key: "role",
   },
-  // {
-  //   name: "Проекты",
-  //   key: "office",
-  // },
-  // {
-  //   name: "Этаж",
-  //   key: "floor",
-  // },
 ];

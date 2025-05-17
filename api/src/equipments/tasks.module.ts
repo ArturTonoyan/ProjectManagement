@@ -9,12 +9,19 @@ import { AuthModule } from 'src/auth/auth.module';
 import { FilesModule } from 'src/files/files.module';
 import { Project } from 'src/offices/projects.model';
 import { Task } from './tasks.model';
+import { ProjectsUsers } from 'src/offices/projects-users.model';
 
 @Module({
   providers: [TasksService],
   controllers: [TasksController],
   imports: [
-    SequelizeModule.forFeature([Laborcosts, User, Task, Project]),
+    SequelizeModule.forFeature([
+      Laborcosts,
+      User,
+      Task,
+      Project,
+      ProjectsUsers,
+    ]),
     RolesModule,
     forwardRef(() => AuthModule),
     FilesModule,
