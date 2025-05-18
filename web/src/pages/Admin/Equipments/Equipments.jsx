@@ -88,6 +88,7 @@ function Tasks() {
           ?.map((el) => el?.costs)
           .reduce((a, b) => Number(a) + Number(b), 0),
       }));
+
       setTableData(qdat);
       setOriginalData(qdat);
     }

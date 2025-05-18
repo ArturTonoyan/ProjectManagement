@@ -79,12 +79,12 @@ $w3: 480px;
 }
 
 @mixin ButtonBlue() {
-  background-color: var(--blue);
-  border: none;
+  // background-color: var(--blue);
+  border: 1px solid var(--blue);
   border-radius: 12px;
   font-family: Montserrat;
   text-align: center;
-  color: #fff;
+  color: var(--blue);
   cursor: pointer;
   font-weight: 600;
   font-size: 16px;
@@ -104,7 +104,7 @@ $w3: 480px;
   font-weight: 600;
   font-size: 16px;
   text-align: center;
-  color: #7872b9;
+  color: var(--blue);
 }
 
 //!!!!!!!!!!!!!

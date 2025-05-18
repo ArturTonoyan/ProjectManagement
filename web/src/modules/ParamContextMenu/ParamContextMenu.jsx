@@ -3,6 +3,7 @@ import styles from "./ParamContextMenu.module.scss";
 
 function ParamContextMenu({ openList, setOpenList, paramMenu, funClick, row }) {
   const listParamRef = useRef(null);
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -24,7 +25,8 @@ function ParamContextMenu({ openList, setOpenList, paramMenu, funClick, row }) {
         <div className={styles.ParamContextMenu} ref={listParamRef}>
           {paramMenu.map((item, index) => (
             <button key={index} onClick={() => funClick({ ...item, row })}>
-              <img src={item.icon} alt="" />
+              {/* Рендерим React-иконку */}
+              {item.icon}
               {item.name}
             </button>
           ))}

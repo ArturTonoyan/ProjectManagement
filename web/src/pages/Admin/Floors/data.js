@@ -1,17 +1,15 @@
-import trashICon from "@assets/images/icons/trash.svg";
-import editIcon from "@assets/images/icons/edit.svg";
-import userIcon from "@assets/images/icons/user.svg";
-import deviceIcon from "@assets/images/leftMenu/device.svg";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 export const paramMenu = [
   {
     name: "Редактировать",
-    icon: editIcon,
+    icon: <EditIcon />,
     key: "edit",
   },
   {
     name: "Удалить",
-    icon: trashICon,
+    icon: <DeleteIcon />,
     key: "delete",
   },
 ];

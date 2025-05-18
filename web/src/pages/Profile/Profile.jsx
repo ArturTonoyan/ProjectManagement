@@ -280,9 +280,32 @@ ${
         <Tabs
           value={tabIndex}
           onChange={(e, newValue) => setTabIndex(newValue)}
+          sx={{
+            "& .MuiTabs-indicator": {
+              backgroundColor: "#08a748", // цвет индикатора под активной вкладкой
+            },
+          }}
         >
-          <Tab label="Профиль" />
-          <Tab label="AI-чат" icon={<ChatIcon />} iconPosition="start" />
+          <Tab
+            label="Профиль"
+            sx={{
+              color: "#08a748", // цвет текста неактивной вкладки
+              "&.Mui-selected": {
+                color: "#08a748", // цвет текста активной вкладки
+              },
+            }}
+          />
+          <Tab
+            label="AI-чат"
+            sx={{
+              color: "#08a748", // цвет текста неактивной вкладки
+              "&.Mui-selected": {
+                color: "#08a748", // цвет текста активной вкладки
+              },
+            }}
+            icon={<ChatIcon />}
+            iconPosition="start"
+          />
         </Tabs>
 
         {tabIndex === 0 && (
@@ -321,7 +344,17 @@ ${
                     src={previewUrl}
                     sx={{ width: 120, height: 120, mb: 2 }}
                   />
-                  <Button component="label" variant="outlined">
+                  <Button
+                    component="label"
+                    variant="outlined"
+                    sx={{
+                      color: "#08a748", // цвет текста неактивной вкладки
+                      "&.Mui-selected": {
+                        color: "#08a748", // цвет текста активной вкладки
+                      },
+                      borderColor: "#08a748",
+                    }}
+                  >
                     Загрузить фото
                     <input
                       hidden
@@ -348,6 +381,13 @@ ${
                       size="small"
                       startIcon={<EditIcon />}
                       onClick={() => setIsEditing(true)}
+                      sx={{
+                        color: "#08a748", // цвет текста неактивной вкладки
+                        "&.Mui-selected": {
+                          color: "#08a748", // цвет текста активной вкладки
+                        },
+                        borderColor: "#08a748",
+                      }}
                     >
                       Редактировать
                     </Button>
@@ -574,11 +614,42 @@ ${
                 label="Ваш вопрос"
                 multiline
                 fullWidth
+                sx={{
+                  "& label": {
+                    color: "#08a748", // цвет лейбла
+                  },
+                  "& label.Mui-focused": {
+                    color: "#08a748", // цвет лейбла при фокусе
+                  },
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": {
+                      borderColor: "#08a748", // обычная рамка
+                    },
+                    "&:hover fieldset": {
+                      borderColor: "#08a748", // при наведении
+                    },
+                    "&.Mui-focused fieldset": {
+                      borderColor: "#08a748", // при фокусе
+                    },
+                  },
+                  input: {
+                    color: "#08a748", // цвет текста
+                  },
+                  textarea: {
+                    color: "#08a748", // цвет текста в multiline
+                  },
+                }}
               />
               <Button
                 onClick={handleAiSubmit}
                 variant="contained"
                 disabled={aiLoading}
+                sx={{
+                  background: "#08a748",
+                  "&:hover": {
+                    background: "#08a748",
+                  },
+                }}
               >
                 {aiLoading ? "Отправка..." : "Отправить"}
               </Button>

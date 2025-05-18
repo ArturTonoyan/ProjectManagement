@@ -1,8 +1,7 @@
-import trashICon from "@assets/images/icons/trash.svg";
-import editIcon from "@assets/images/icons/edit.svg";
-import userIcon from "@assets/images/icons/user.svg";
-import officeIcon from "@assets/images/leftMenu/office.svg";
-import deviceIcon from "@assets/images/leftMenu/device.svg";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import AssignmentIcon from "@mui/icons-material/Assignment"; // для "Задачи"
+import GroupIcon from "@mui/icons-material/Group"; // для "Участники"
 
 export const typeOwnerships = [
   { name: "Арендованный", id: "1" },
@@ -12,29 +11,30 @@ export const typeOwnerships = [
 export const paramMenu = [
   {
     name: "Редактировать",
-    icon: editIcon,
+    icon: <EditIcon />,
     key: "edit",
   },
   {
     name: "Удалить",
-    icon: trashICon,
+    icon: <DeleteIcon />,
     key: "delete",
   },
   {
     name: "Задачи",
-    icon: officeIcon,
+    icon: <AssignmentIcon />,
     key: "tasks",
   },
   {
     name: "Участники",
-    icon: userIcon,
+    icon: <GroupIcon />,
     key: "users",
   },
 ];
+
 export const paramMenuUser = [
   {
     name: "Задачи",
-    icon: officeIcon,
+    icon: <AssignmentIcon />,
     key: "tasks",
   },
 ];

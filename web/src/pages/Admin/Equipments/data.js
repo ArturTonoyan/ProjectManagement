@@ -1,21 +1,23 @@
-import trashICon from "@assets/images/icons/trash.svg";
-import editIcon from "@assets/images/icons/edit.svg";
-import officeIcon from "@assets/images/leftMenu/office.svg";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import AssignmentIcon from "@mui/icons-material/Assignment"; // для "Задачи"
+import GroupIcon from "@mui/icons-material/Group"; // для "Участники"
 
 export const paramMenu = [
   {
     name: "Редактировать",
-    icon: editIcon,
+    icon: <EditIcon />,
     key: "edit",
   },
   {
     name: "Удалить",
-    icon: trashICon,
+    icon: <DeleteIcon />,
     key: "delete",
   },
   {
     name: "Трудозатраы",
-    icon: officeIcon,
+    icon: <AssignmentIcon />,
+
     key: "laborCosts",
   },
 ];
