@@ -6,6 +6,8 @@ import {
   Table,
   HasMany,
   BelongsToMany,
+  HasOne,
+  BelongsTo,
 } from 'sequelize-typescript';
 import { Task } from 'src/equipments/tasks.model';
 import { User } from 'src/users/users.model';
@@ -55,6 +57,8 @@ export class Project extends Model<Project, ProjectCreationAttrs> {
 
   @BelongsToMany(() => User, () => ProjectsUsers)
   users: User[];
+  @BelongsTo(() => User)
+  director: User;
 
   @HasMany(() => Task)
   eqipments: Task[];

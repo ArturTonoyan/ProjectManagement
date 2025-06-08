@@ -83,34 +83,10 @@ export const tableHeader = [
     name: "Описание",
     key: "description",
   },
-  // {
-  //   name: "Телефон",
-  //   key: "phone",
-  // },
-  // {
-  //   name: "Почта",
-  //   key: "email",
-  // },
   {
     name: "Руководитель",
-    key: "directorId",
+    key: "director",
   },
-  // {
-  //   name: "Тип собственности",
-  //   key: "typeOwnership",
-  //   type: "text",
-  // },
-  // {
-  //   name: "Арендодатель",
-  //   key: "renter",
-  //   type: "text",
-  // },
-  // {
-  //   name: "Договор",
-  //   key: "contract",
-  //   type: "file",
-  //   accept: "application/pdf",
-  // },
   {
     name: "Дата начала проекта",
     key: "dateStart",
@@ -121,26 +97,6 @@ export const tableHeader = [
     key: "dateEnd",
     type: "date",
   },
-  // {
-  //   name: "Стоимость аренды в месяц",
-  //   key: "cost",
-  //   type: "number",
-  // },
-  // {
-  //   name: "Контакт арендодателя",
-  //   key: "renterContact",
-  //   type: "text",
-  //   placeholder: "+7 (___) ___-__-__",
-  // },
-  // {
-  //   name: "Площадь кв. м.",
-  //   key: "area",
-  //   type: "number",
-  // },
-  // {
-  //   name: "Этажи",
-  //   key: "floorsCount",
-  // },
   {
     name: "Участники",
     key: "usersCount",
